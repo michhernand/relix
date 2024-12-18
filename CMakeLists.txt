@@ -3,24 +3,23 @@ project(relix CXX)
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-add_library(
-	relix_lib 
-	src/impy.cpp
-	src/utilities/column_contribution.cpp
-	src/utilities/sort.cpp
-	src/algos/algo_base.cpp
-	src/algos/algo_naive.cpp
+find_package(Armadillo REQUIRED)
+# find_package(BLAS REQUIRED)
+# find_package(LAPACK REQUIRED)
+
+file(GLOB_RECURSE RELIX_SOURCES ${CMAKE_SOURCE_DIR}/src/*.cpp)
+add_library(relix_lib ${RELIX_SOURCES})
+
+target_include_directories(relix_lib PUBLIC 
+	${CMAKE_SOURCE_DIR}/include ${ARMADILLO_INCLUDE_DIRS}
 )
 
-target_include_directories(relix_lib PUBLIC ${CMAKE_SOURCE_DIR}/include)
+target_link_libraries(relix_lib PUBLIC 
+	${ARMADILLO_LIBRARIES}
+)
+
+# Pass BLAS/LAPACK libraries to tests directory
+# set(BLAS_LIBRARIES ${BLAS_LIBRARIES} CACHE INTERNAL "BLAS Libraries")
+# set(LAPACK_LIBRARIES ${LAPACK_LIBRARIES} CACHE INTERNAL "LAPACK Libraries")
 
 add_subdirectory(tests)
-
-# add_executable(relix_test tests/src/test_main.cpp)
-#
-# target_link_libraries(relix_test PRIVATE relix_lib Catch2::Catch2WithMain)
-#
-# include(CTest)
-#
-# add_test(NAME basic_test COMMAND relix_test)
-

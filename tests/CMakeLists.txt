@@ -16,11 +16,14 @@ include(Catch)
 add_executable(relix_test
 	src/test_main.cpp
 	src/test_algo_naive.cpp
+	src/test_algo_last.cpp
 )
 
 target_link_libraries(relix_test PRIVATE 
 	Catch2::Catch2WithMain
 	relix_lib
+	# ${BLAS_LIBRARIES}
+	# ${LAPACK_LIBRARIES}
 )
 
 target_include_directories(relix_test PRIVATE
