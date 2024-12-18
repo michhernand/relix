@@ -7,6 +7,7 @@
 
 class RelimpAlgorithm {
 	public:
+		virtual ~RelimpAlgorithm() = default;
 		virtual arma::uword n_iter(arma::dmat x) = 0;
 		virtual ColumnContribution evaluate_column(
 				arma::dmat x, 
