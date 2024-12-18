@@ -51,7 +51,7 @@ void dual_lm_cc(
                 const arma::dvec& toggle_vec,
                 const arma::dmat& x,
                 const arma::dvec& y,
-                ColumnContribution cc
+                ColumnContribution& cc
                ) {
         std::pair<Model, Model> models = dual_lm(toggle_vec, x, y);
         cc.set_next(models.first.r_squared, models.second.r_squared);

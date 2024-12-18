@@ -33,7 +33,7 @@ void dual_lm_cc(
                 const arma::dvec& toggle_vec, 
                 const arma::dmat& x,
                 const arma::dvec& y, 
-                ColumnContribution cc
+                ColumnContribution& cc
                 );
 
 #endif //MODEL_H
