@@ -30,5 +30,7 @@ class ColumnContribution {
                 double get_lift();
 };
 
+void sort_cc(std::vector<ColumnContribution>& ccs);
+
 #endif //COLUMN_CONTRIBUTION_H
 

@@ -1,6 +1,12 @@
 #include <armadillo>
+#include <algorithm>
 #include "column_contribution.h"
 
+void sort_cc(std::vector<ColumnContribution>& ccs) {
+	std::sort(ccs.begin(), ccs.end(), [](ColumnContribution& a, ColumnContribution& b) {
+			return a.get_lift() < b.get_lift();
+	});
+}
 
 void ColumnContribution::set_at_with_column(double val, arma::uword index) {
         this->r_squared_with_column[index] = val;
