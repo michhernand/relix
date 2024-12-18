@@ -21,4 +21,3 @@ arma::uvec argsort_array(const arma::dvec& arr, bool desc) {
     return indices;
 }
 
-
