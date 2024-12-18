@@ -1,4 +1,5 @@
 #include <armadillo>
+#include <stdexcept>
 #include "permutations.h"
 #include "algo_last.h"
 #include "model.h"
@@ -22,6 +23,9 @@ ColumnContribution LastRelimpAlgorithm::evaluate_column(
 		arma::dvec y,
 		arma::uword column_index
 ) {
+	if (column_index >= x.n_cols) {
+		throw std::runtime_error("tried to access an invalid column of x");
+	}
 
 	// Get all permutations of indexes of columns to get.
 	auto permutations = last_permutations(x.n_cols, column_index);
