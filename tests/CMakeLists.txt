@@ -13,18 +13,15 @@ FetchContent_MakeAvailable(Catch2)
 list(APPEND CMAKE_MODULE_PATH ${catch2_SOURCE_DIR}/extras)
 include(Catch)
 
+file(GLOB_RECURSE RELIX_TESTS ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp)
+
 add_executable(relix_test
-	src/test_main.cpp
-	src/test_algo_naive.cpp
-	src/test_algo_last.cpp
-	src/test_model.cpp
+	${RELIX_TESTS}
 )
 
 target_link_libraries(relix_test PRIVATE 
 	Catch2::Catch2WithMain
 	relix_lib
-	# ${BLAS_LIBRARIES}
-	# ${LAPACK_LIBRARIES}
 )
 
 target_include_directories(relix_test PRIVATE
