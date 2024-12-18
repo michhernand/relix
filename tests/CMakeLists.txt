@@ -17,6 +17,7 @@ add_executable(relix_test
 	src/test_main.cpp
 	src/test_algo_naive.cpp
 	src/test_algo_last.cpp
+	src/test_model.cpp
 )
 
 target_link_libraries(relix_test PRIVATE 
