@@ -10,6 +10,11 @@ void ColumnContribution::set_at_without_column(double val, arma::uword index) {
         this->r_squared_without_column[index] = val;
 }
 
+/**
+ * @brief ColumnContribution constructor.
+ * @param column The index of the column being tracked..
+ * @param n The number of permutations associated with this ColumnContribution. Used for pre-allocating vectors.
+*/
 ColumnContribution::ColumnContribution(
                 arma::uword column,
                 arma::uword n
@@ -17,9 +22,11 @@ ColumnContribution::ColumnContribution(
         column(column),
 
 	// Preallocate `r_squared_with_column` attribute with n-size zeros vector.
+	// These are populated by RelimpAlgorithm. It loops over all permutations and updates these 1 by 1.
         r_squared_with_column(arma::dvec(n, arma::fill::zeros)),
 
 	// Preallocate `r_squared_without_column` attribute with n-size zeros vector.
+	// These are populated by RelimpAlgorithm. It loops over all permutations and updates these 1 by 1.
         r_squared_without_column(arma::dvec(n, arma::fill::zeros)),
 
         // Default i to 0.
