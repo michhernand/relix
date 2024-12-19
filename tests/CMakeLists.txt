@@ -25,6 +25,6 @@ target_link_libraries(relix_test PRIVATE
 )
 
 target_include_directories(relix_test PRIVATE
-	${CMAKE_SOURCE_DIR}/include
+	${CMAKE_CURRENT_SOURCE_DIR}/include
 )
 catch_discover_tests(relix_test)
