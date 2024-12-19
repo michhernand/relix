@@ -1,5 +1,5 @@
-#ifndef COLUMN_CONTRIBUTION_H
-#define COLUMN_CONTRIBUTION_H
+#ifndef CC_H
+#define CC_H
 
 #include <armadillo>
 

@@ -1,5 +1,5 @@
-#ifndef MODEL_H
-#define MODEL_H
+#ifndef LM_H
+#define LM_H
 
 #include <armadillo>
 #include "cc.h"

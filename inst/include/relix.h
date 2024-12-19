@@ -1,3 +1,6 @@
+#ifndef RELIX_H
+#define RELIX_H
+
 #include <armadillo>
 #include <memory>
 #include "cc.h"
@@ -16,3 +19,5 @@ std::vector<ColumnContribution> relative_importance(
 		arma::dmat& y,
 		std::string& algo
 );
+
+#endif
