@@ -3,7 +3,7 @@
 # Define directories and files to clean
 BUILD_DIR="build"
 CACHE_DIR=".cache"
-CACHE_FILES=("CMakeCache.txt" "compile_commands.json" "CMakeFiles" "*.o" "*.so" "*.a" "*.log" "rleix_*.tar.gz")
+CACHE_FILES=("CMakeCache.txt" "compile_commands.json" "CMakeFiles" "*.o" "*.so" "*.a" "*.log" "relix_*.tar.gz")
 TEMP_FILES=("*~" "*.swp" "*.bak")
 
 echo "Starting cleanup..."
