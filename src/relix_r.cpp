@@ -10,8 +10,6 @@
 #include "algos.h"
 #include "relix.h"
 
-#include <iostream>
-
 // [[Rcpp::export]]
 Rcpp::List relix_r(
 		Rcpp::NumericMatrix x,
@@ -23,11 +21,18 @@ Rcpp::List relix_r(
 	LastRelimpAlgorithm ra = LastRelimpAlgorithm();
 	std::vector<ColumnContribution> ccs = relative_importance(x_arma, y_arma, ra);
 
-
-	auto output = Rcpp::List::create();
+	// auto output = Rcpp::List::create();
+	auto output_index = Rcpp::List::create();
+	auto output_importance = Rcpp::List::create();
 	for (ColumnContribution cc : ccs) {
-		output.push_back(cc.get_column());
+		auto output_elem = Rcpp::List::create();
+
+		output_index.push_back(cc.get_column());
+		output_importance.push_back(cc.get_lift());
 	}
 
-	return output;
+	return Rcpp::List::create(
+			Rcpp::Named("index") = Rcpp::wrap(output_index),
+			Rcpp::Named("importance") = Rcpp::wrap(output_importance)
+	);
 }
