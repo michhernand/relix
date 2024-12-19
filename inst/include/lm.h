@@ -2,7 +2,7 @@
 #define MODEL_H
 
 #include <armadillo>
-#include "column_contribution.h"
+#include "cc.h"
 
 struct Model {
         arma::dvec coefficients;

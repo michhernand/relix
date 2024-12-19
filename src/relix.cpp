@@ -1,9 +1,8 @@
 #include <armadillo>
 #include <memory>
 #include <stdexcept>
-#include "column_contribution.h"
-#include "algo_base.h"
-#include "algo_last.h"
+#include "algos.h"
+#include "cc.h"
 
 std::unique_ptr<RelimpAlgorithm> get_algo(std::string& algo) {
 	if (algo == "last") {

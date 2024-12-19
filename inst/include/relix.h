@@ -1,7 +1,7 @@
 #include <armadillo>
 #include <memory>
-#include "column_contribution.h"
-#include "algo_base.h"
+#include "cc.h"
+#include "algos.h"
 
 std::unique_ptr<RelimpAlgorithm> get_algo(std::string& algo);
 

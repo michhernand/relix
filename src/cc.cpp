@@ -1,6 +1,6 @@
 #include <armadillo>
 #include <algorithm>
-#include "column_contribution.h"
+#include "cc.h"
 
 void sort_cc(std::vector<ColumnContribution>& ccs) {
 	std::sort(ccs.begin(), ccs.end(), [](ColumnContribution& a, ColumnContribution& b) {

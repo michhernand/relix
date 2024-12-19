@@ -3,7 +3,7 @@
 #include <catch2/matchers/catch_matchers_floating_point.hpp>
 #include <armadillo>
 #include "relix.h"
-#include "algo_last.h"
+#include "algos.h"
 
 TEST_CASE("Test Pipeline") {
 	arma::dmat data = arma::zeros(5, 4);

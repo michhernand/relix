@@ -3,8 +3,20 @@
 #include <catch2/matchers/catch_matchers_floating_point.hpp>
 #include <armadillo>
 #include <memory>
-#include "algo_last.h"
-#include "column_contribution.h"
+#include "algos.h"
+#include "cc.h"
+
+TEST_CASE("Smoke Tests for NaiveRelimpAlgorithm") {
+	arma::dmat x = arma::zeros(3, 4);
+	arma::dvec y = arma::zeros(x.n_rows);
+	
+	std::unique_ptr<NaiveRelimpAlgorithm> ra(new NaiveRelimpAlgorithm);
+	auto n_iter = ra->n_iter(x);
+	REQUIRE(n_iter == x.n_cols);
+
+	auto cc = ra->evaluate_column(x, y, 0);
+	REQUIRE(cc.column == 0);
+}
 
 TEST_CASE("Smoke Tests for LastRelimpAlgorithm") {
 	arma::dmat x = arma::zeros(5, 4);

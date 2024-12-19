@@ -3,8 +3,8 @@
 #include <catch2/matchers/catch_matchers_floating_point.hpp>
 #include <armadillo>
 #include <memory>
-#include "column_contribution.h"
-#include "model.h"
+#include "cc.h"
+#include "lm.h"
 
 TEST_CASE("Test Linear Model (100% RSQ)") {
 	arma::dmat data = arma::zeros(5, 4);

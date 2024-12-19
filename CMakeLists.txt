@@ -10,7 +10,7 @@ file(GLOB_RECURSE RELIX_SOURCES ${CMAKE_SOURCE_DIR}/src/*.cpp)
 add_library(relix_lib ${RELIX_SOURCES})
 
 target_include_directories(relix_lib PUBLIC 
-	${CMAKE_SOURCE_DIR}/include ${ARMADILLO_INCLUDE_DIRS}
+	${CMAKE_SOURCE_DIR}/inst/include ${ARMADILLO_INCLUDE_DIRS}
 )
 
 target_link_libraries(relix_lib PUBLIC 

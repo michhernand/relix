@@ -1,7 +1,7 @@
 #include <utility>
 #include <armadillo>
-#include "model.h"
-#include "column_contribution.h"
+#include "lm.h"
+#include "cc.h"
 
 Model basic_lm(
                 const arma::dmat& x,
