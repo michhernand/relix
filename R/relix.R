@@ -1,6 +1,9 @@
-relix <- function(fit, type) {
+relix <- function(fit, type, intercept = FALSE) {
 	# independent variables
 	model_matrix <- model.matrix(fit)
+	if (intercept == FALSE) {
+		model_matrix <- model_matrix[, -which(colnames(model_matrix) == "(Intercept)")]
+	}
 
 	# dependent variable
 	model_frame <- model.frame(fit)
@@ -10,7 +13,7 @@ relix <- function(fit, type) {
 
 	index_columns <- c()
 	for (ix in result$index) {
-		index_column <- colnames(model_matrix)[ix+1]
+		index_column <- colnames(model_matrix)[ix + 1]
 		index_columns <- c(index_columns, index_column)
 	}
 

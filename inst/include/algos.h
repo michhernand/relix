@@ -12,10 +12,6 @@ class RelimpAlgorithm {
 	public:
 		virtual ~RelimpAlgorithm() = default;
 		virtual arma::uword n_iter(arma::dmat x) = 0;
-		virtual std::vector<arma::uvec> permutations(
-				arma::uword n_columns,
-				arma::uword skip_index
-		) = 0;
 		virtual ColumnContribution evaluate_column(
 				arma::dmat x, 
 				arma::dvec y, 
@@ -40,7 +36,7 @@ class NaiveRelimpAlgorithm : public RelimpAlgorithm {
 		std::vector<arma::uvec> permutations(
 				arma::uword n_columns,
 				arma::uword skip_index
-		) override;
+		);
 		ColumnContribution evaluate_column(
 				arma::dmat x, 
 				arma::dvec y, 
@@ -62,10 +58,10 @@ class LastRelimpAlgorithm : public RelimpAlgorithm {
 	public:
 		LastRelimpAlgorithm();
 		arma::uword n_iter(arma::dmat x) override;
-		std::vector<arma::uvec> permutations(
+		arma::uvec permutations(
 				arma::uword n_columns,
 				arma::uword skip_index
-		) override;
+		);
 		ColumnContribution evaluate_column(
 				arma::dmat x, 
 				arma::dvec y, 

@@ -1,5 +1,7 @@
 #include <armadillo>
 #include <algorithm>
+#include <iostream>
+#include <stdexcept>
 #include <utility>
 #include <vector>
 #include "cc.h"
@@ -114,28 +116,17 @@ arma::uword LastRelimpAlgorithm::n_iter(arma::dmat x) {
 	return x.n_cols;
 }
 
-std::vector<arma::uvec> LastRelimpAlgorithm::permutations(
+arma::uvec LastRelimpAlgorithm::permutations(
 		arma::uword n_columns, 
 		arma::uword skip_index
-) {
-        std::vector<arma::uvec> permutations;
+		) {
+	arma::uvec permutations;
 
-        for (arma::uword i = 1; i <= n_columns; ++i) {
-                arma::uvec indices;
-
-                for (arma::uword j = 0; j < i; ++j) {
-                        if (j != skip_index) {
-                                indices.insert_rows(
-						indices.n_rows, 
-						arma::uvec{ j }
-				);
-                        }
-                }
-                permutations.push_back(indices);
-        }
-
-        return permutations;
+	arma::uvec n_columns_v = arma::regspace<arma::uvec>(0, n_columns-1);
+	arma::uvec mask = (n_columns_v != skip_index);
+	return n_columns_v.elem(arma::find(mask));
 }
+
 
 /**
 * @brief Gathers r-squared values to eval the importance of a value of x.
@@ -154,25 +145,18 @@ ColumnContribution LastRelimpAlgorithm::evaluate_column(
 	}
 
 	// Get all permutations of indexes of columns to get.
-	auto permutations = this->permutations(x.n_cols, column_index);
+	arma::uvec permutations = this->permutations(x.n_cols, column_index);
 
 	// A column contribution object (column_contribution.cpp.
 	auto cc = ColumnContribution(column_index, permutations.size());
 
-	for (arma::uword i = 0; i < permutations.size(); ++i) {
+	arma::dvec toggle_col = x.col(column_index);
+	x.shed_col(column_index);
+	dual_lm_cc(
+			toggle_col,
+			x, y, cc
+	);
 
-		// Get the indexes of columns to get.
-		auto perm_x_ix = permutations[i];
-
-		// Get columns using the indexes.
-		auto perm_x = x.cols(perm_x_ix);
-
-		dual_lm_cc(
-				x.col(column_index),
-				perm_x,
-				y, cc
-		);
-	}
 	return cc;
 }
 
@@ -186,8 +170,17 @@ std::vector<ColumnContribution> LastRelimpAlgorithm::evaluate_columns(
 		arma::dmat x,
 		arma::dvec y
 ) {
+	if (x.n_cols == 0) {
+		throw std::runtime_error("x has no columns");
+	}
+
 	std::vector<ColumnContribution> ccs;
 	ccs.resize(x.n_cols, ColumnContribution(0, 0));
+
+	if (x.n_cols != ccs.size()) {
+		throw std::runtime_error("x size != ccs size");
+	}
+
 
 	for (arma::uword i = 0; i < x.n_cols; ++i) {
 		ccs[i] = evaluate_column(x, y, i);
