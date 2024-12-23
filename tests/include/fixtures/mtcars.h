@@ -37,7 +37,18 @@ class MTCars {
 		MTCars(const std::string& path = DEFAULT_PATH)
 			: path(path)
 		{
-			this->data.load(arma::csv_name(this->path, this->headers));
+			bool ok = this->data.load(
+					arma::csv_name(
+						this->path, 
+						this->headers
+					)
+			);
+
+			if (!ok) {
+				throw std::runtime_error(
+						"failed to load test data csv"
+				);
+			}
 		}
 
 	protected:
@@ -62,11 +73,10 @@ class MTCars {
 				x_ixs[i] = x_ix;
 			}
 
-			arma::dmat x = data.cols(x_ixs);
 			if (intercept) {
-				x = add_intercept(data.cols(x_ixs));
+				return add_intercept(data.cols(x_ixs));
+			} else {
+				return data.cols(x_ixs);
 			}
-			return x;
 		}
 };
-
