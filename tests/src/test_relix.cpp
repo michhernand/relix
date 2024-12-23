@@ -2,6 +2,7 @@
 #include <catch2/matchers/catch_matchers.hpp>
 #include <catch2/matchers/catch_matchers_floating_point.hpp>
 #include <armadillo>
+#include <string>
 #include "relix.h"
 #include "algos.h"
 #include "fixtures/mtcars.h"
@@ -12,27 +13,45 @@ TEST_CASE_METHOD(MTCars, "Test-Pipeline-1") {
 	LastRelimpAlgorithm ra = LastRelimpAlgorithm();
 	std::vector<ColumnContribution> ccs = relative_importance(get_x(x_labs), get_y(), ra);
 
-	for (ColumnContribution cc : ccs) {
-		WARN(cc.get_lift());
+	std::vector<double> expected_vals = {
+		0.0726,
+		0.0074987,
+		0.0131126,
+		0.0174177, 
+		0.0146241
+	};
+	for (arma::uword i; i < ccs.size(); ++i) {
+		REQUIRE_THAT(
+			ccs[i].get_lift(),
+			Catch::Matchers::WithinRel(
+				expected_vals[i],
+				0.001
+			)
+		);
 	}
 }
 
-// TEST_CASE("Test Pipeline") {
-// 	arma::dmat data = arma::zeros(5, 4);
-// 	bool ok = data.load("../tests/data/sample1.csv");
-//
-// 	REQUIRE(ok);
-// 	REQUIRE(arma::accu(data) > 0);
-//
-// 	arma::dmat x = data.cols(0, 1);
-// 	arma::dvec y = data.col(2);
-// 	
-// 	LastRelimpAlgorithm ra = LastRelimpAlgorithm();
-// 	std::vector<ColumnContribution> ccs = relative_importance(x, y, ra);
-//
-// 	double last_lift = -9999;
-// 	for (ColumnContribution cc : ccs) {
-// 		REQUIRE(cc.get_lift() > last_lift);
-// 		last_lift = cc.get_lift();
-// 	}
-// }
+
+TEST_CASE_METHOD(MTCars, "Test-Pipeline-2") {
+	std::vector<std::string> x_labs = {"qsec", "vs", "am", "gear"};
+
+	LastRelimpAlgorithm ra = LastRelimpAlgorithm();
+	std::vector<ColumnContribution> ccs = relative_importance(get_x(x_labs), get_y(), ra);
+
+	std::vector<double> expected_vals = {
+		0.00058800,
+		0.02968600,
+		0.03160428,
+		0.14545843,
+		0.00024795,
+	};
+	for (arma::uword i; i < ccs.size(); ++i) {
+		REQUIRE_THAT(
+			ccs[i].get_lift(),
+			Catch::Matchers::WithinRel(
+				expected_vals[i],
+				0.001
+			)
+		);
+	}
+}
