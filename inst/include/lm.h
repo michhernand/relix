@@ -25,18 +25,11 @@ Model basic_lm(
                 const arma::dvec& y
                 );
 
-std::pair<Model, Model> dual_lm(
-                const arma::dvec& toggle_vec, 
-                const arma::dmat& x,
-                const arma::dvec& y
-                );
-
-void dual_lm_cc(
-                const arma::dvec& toggle_vec, 
-                const arma::dmat& x,
-                const arma::dvec& y, 
-                ColumnContribution& cc
-                );
+Model basic_lm_except(
+		arma::dmat x,
+		const arma::dvec& y,
+		arma::uword column_index
+);
 
 #endif //MODEL_H
 
