@@ -18,7 +18,6 @@ std::vector<ColumnContribution> relative_importance(
 		RelimpAlgorithm& algo
 ) {
 	std::vector<ColumnContribution> ccs = algo.evaluate_columns(x, y);
-	sort_cc(ccs);
 	return ccs;
 }
 
@@ -29,7 +28,5 @@ std::vector<ColumnContribution> relative_importance(
 ) {
 	std::unique_ptr<RelimpAlgorithm> algoObj = get_algo(algo);
 	auto ccs = algoObj->evaluate_columns(x, y);
-
-	sort_cc(ccs);
 	return ccs;
 }
