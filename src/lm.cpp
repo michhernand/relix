@@ -3,7 +3,7 @@
 
 arma::dmat add_intercept(const arma::dmat& x) {
 	arma::vec intercept = arma::ones<arma::vec>(x.n_rows);
-	return arma::join_horiz(intercept, x);
+	return arma::join_horiz(x, intercept);
 
 }
 
