@@ -17,7 +17,10 @@ class MTCars {
 		arma::field<std::string> headers;
 		const std::string path;
 
-		arma::uword lookup_index(std::string name, arma::field<std::string> headers) {
+		arma::uword lookup_index(
+				std::string name, 
+				arma::field<std::string> headers
+		) {
 			for (arma::uword i = 0; i < headers.size(); ++i) {
 				std::string header = headers.at(i);
 				if (header.front() == '"' && header.back() == '"') {
@@ -46,7 +49,10 @@ class MTCars {
 			return data.col(y_ix);
 		}
 
-		arma::dmat get_x(std::vector<std::string> labs = DEFAULT_X_LABS, bool intercept = true) {
+		arma::dmat get_x(
+				std::vector<std::string> labs = DEFAULT_X_LABS, 
+				bool intercept = true
+		) {
 			arma::uvec x_ixs(labs.size());
 			for (arma::uword i = 0; i < labs.size(); ++i) {
 				arma::uword x_ix = this->lookup_index(labs[i], headers);
