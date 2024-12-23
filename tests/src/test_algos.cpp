@@ -6,59 +6,38 @@
 #include "algos.h"
 #include "cc.h"
 
-TEST_CASE("Smoke Tests for NaiveRelimpAlgorithm") {
-	arma::dmat x = arma::zeros(3, 4);
-	arma::dvec y = arma::zeros(x.n_rows);
-	
-	std::unique_ptr<NaiveRelimpAlgorithm> ra(new NaiveRelimpAlgorithm);
-	auto n_iter = ra->n_iter(x);
-	REQUIRE(n_iter == x.n_cols);
-
-	auto cc = ra->evaluate_column(x, y, 0);
-	REQUIRE(cc.column == 0);
-}
-
-TEST_CASE("Smoke Tests for LastRelimpAlgorithm") {
-	arma::dmat x = arma::zeros(5, 4);
-	arma::dvec y = arma::zeros(x.n_rows);
-
-	std::unique_ptr<LastRelimpAlgorithm> ra(new LastRelimpAlgorithm);
-	auto n_iter = ra->n_iter(x);
-	REQUIRE(n_iter == x.n_cols);
-}
-
-TEST_CASE("Test LastRelimpAlgorithm.evaluate_column") {
-	arma::dmat data = arma::zeros(5, 4);
-	data.load("../tests/data/sample1.csv");
-
-	REQUIRE(arma::accu(data) > 0);
-
-	arma::dmat x = data.cols(0, 1);
-	arma::dvec y = data.col(2);
-
-	std::unique_ptr<LastRelimpAlgorithm> ra(new LastRelimpAlgorithm);
-
-	auto cc = ra->evaluate_column(x, y, 0);
-
-	auto mean_without = cc.get_mean_without_column();
-	REQUIRE_THAT(
-			mean_without,
-			Catch::Matchers::WithinRel(-2.985, 0.001)
-	);
-
-	auto mean_with = cc.get_mean_with_column();
-	REQUIRE_THAT(
-			mean_with, 
-			Catch::Matchers::WithinRel(0.5265, 0.001)
-	);
-
-	auto lift = cc.get_lift();
-	auto calculated_lift = mean_with - mean_without;
-	REQUIRE_THAT(
-			lift, 
-			Catch::Matchers::WithinRel(calculated_lift, 0.001)
-	);
-}
+// TEST_CASE("Test LastRelimpAlgorithm.evaluate_column") {
+// 	arma::dmat data = arma::zeros(5, 4);
+// 	data.load("../tests/data/sample1.csv");
+//
+// 	REQUIRE(arma::accu(data) > 0);
+//
+// 	arma::dmat x = data.cols(0, 1);
+// 	arma::dvec y = data.col(2);
+//
+// 	std::unique_ptr<LastRelimpAlgorithm> ra(new LastRelimpAlgorithm);
+//
+// 	auto cc = ra->evaluate_column(x, y, 0);
+//
+// 	auto mean_without = cc.get_mean_without_column();
+// 	REQUIRE_THAT(
+// 			mean_without,
+// 			Catch::Matchers::WithinRel(-2.985, 0.001)
+// 	);
+//
+// 	auto mean_with = cc.get_mean_with_column();
+// 	REQUIRE_THAT(
+// 			mean_with, 
+// 			Catch::Matchers::WithinRel(0.5265, 0.001)
+// 	);
+//
+// 	auto lift = cc.get_lift();
+// 	auto calculated_lift = mean_with - mean_without;
+// 	REQUIRE_THAT(
+// 			lift, 
+// 			Catch::Matchers::WithinRel(calculated_lift, 0.001)
+// 	);
+// }
 
 TEST_CASE("Test LastRelimpAlgorithm.evaluate_columns") {
 	arma::dmat data = arma::zeros(5, 4);

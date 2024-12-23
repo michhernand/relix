@@ -18,6 +18,8 @@ struct Model {
              ) : coefficients(coefficients), fitted_values(fitted_values), residuals(residuals), r_squared(r_squared) {};
 };
 
+arma::dmat add_intercept(const arma::dmat& x);
+
 Model basic_lm(
                 const arma::dmat& x, 
                 const arma::dvec& y
