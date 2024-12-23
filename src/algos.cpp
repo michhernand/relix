@@ -46,12 +46,11 @@ ColumnContribution LastRelimpAlgorithm::evaluate_column(
 		throw std::runtime_error("tried to access an invalid column of x");
 	}
 
-	arma::dvec toggle_col = x.col(column_index);
 	x.shed_col(column_index);
 
 	Model partial_model = basic_lm(x, y);
 
-	auto cc = ColumnContribution(column_index, x.n_cols);
+	auto cc = ColumnContribution(column_index, 1);
 	cc.set_next(full_model.r_squared, partial_model.r_squared);
 
 	return cc;
