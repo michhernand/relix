@@ -13,8 +13,8 @@ std::unique_ptr<RelimpAlgorithm> get_algo(std::string& algo) {
 
 
 std::vector<ColumnContribution> relative_importance(
-		arma::dmat& x, 
-		arma::dvec& y, 
+		const arma::dmat& x, 
+		const arma::dvec& y, 
 		RelimpAlgorithm& algo
 ) {
 	std::vector<ColumnContribution> ccs = algo.evaluate_columns(x, y);
@@ -23,8 +23,8 @@ std::vector<ColumnContribution> relative_importance(
 }
 
 std::vector<ColumnContribution> relative_importance(
-		arma::dmat& x,
-		arma::dmat& y,
+		const arma::dmat& x,
+		const arma::dmat& y,
 		std::string& algo
 ) {
 	std::unique_ptr<RelimpAlgorithm> algoObj = get_algo(algo);
