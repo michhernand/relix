@@ -40,4 +40,25 @@ class LastRelimpAlgorithm : public RelimpAlgorithm {
 		) override;
 };
 
+class FirstRelimpAlgorithm : public RelimpAlgorithm {
+	private:
+		double get_sum_rsquared(
+				arma::dmat x,
+				arma::dvec y
+		);
+	public:
+		FirstRelimpAlgorithm();
+		ColumnContribution evaluate_column(
+				arma::dmat x,
+				arma::dvec y,
+				arma::uword column_index,
+				Model full_model
+		) override;
+
+		std::vector<ColumnContribution> evaluate_columns(
+				arma::dmat x,
+				arma::dvec y
+		) override;
+};
+
 #endif
