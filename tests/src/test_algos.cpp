@@ -2,7 +2,6 @@
 #include <catch2/matchers/catch_matchers.hpp>
 #include <catch2/matchers/catch_matchers_floating_point.hpp>
 #include <armadillo>
-#include <memory>
 #include "algos.h"
 #include "cc.h"
 #include "lm.h"
@@ -12,10 +11,10 @@ TEST_CASE_METHOD(MTCars, "Test LastRelimpAlgorithm.evaluate_column-1") {
 	std::vector<std::string> full_x_labs = {"cyl", "disp", "hp", "drat", "qsec"};
 	Model full_model = basic_lm(get_x(full_x_labs), get_y());
 
-	std::unique_ptr<LastRelimpAlgorithm> ra(new LastRelimpAlgorithm);
+	LastRelimpAlgorithm ra = LastRelimpAlgorithm();
 
 	std::vector<std::string> x_labs = {"cyl", "disp", "hp", "drat"};
-	auto cc = ra->evaluate_column(get_x(x_labs), get_y(), 0, full_model);
+	auto cc = ra.evaluate_column(get_x(x_labs), get_y(), 0, full_model);
 
 	auto mean_without = cc.get_mean_without_column();
 	REQUIRE_THAT(
@@ -41,10 +40,10 @@ TEST_CASE_METHOD(MTCars, "Test LastRelimpAlgorithm.evaluate_column-2") {
 	std::vector<std::string> full_x_labs = {"qsec", "vs", "am", "gear", "cyl"};
 	Model full_model = basic_lm(get_x(full_x_labs), get_y());
 
-	std::unique_ptr<LastRelimpAlgorithm> ra(new LastRelimpAlgorithm);
+	LastRelimpAlgorithm ra = LastRelimpAlgorithm();
 
 	std::vector<std::string> x_labs = {"qsec", "vs", "am", "gear"};
-	auto cc = ra->evaluate_column(get_x(x_labs), get_y(), 0, full_model);
+	auto cc = ra.evaluate_column(get_x(x_labs), get_y(), 0, full_model);
 
 	auto mean_without = cc.get_mean_without_column();
 	REQUIRE_THAT(
@@ -67,10 +66,10 @@ TEST_CASE_METHOD(MTCars, "Test LastRelimpAlgorithm.evaluate_column-2") {
 }
 
 TEST_CASE_METHOD(MTCars, "Test LastRelimpAlgorithm.evaluate_columns-1") {
-	std::unique_ptr<LastRelimpAlgorithm> ra(new LastRelimpAlgorithm);
+	LastRelimpAlgorithm ra = LastRelimpAlgorithm();
 
 	std::vector<std::string> x_labs = {"cyl", "disp", "hp", "drat"};
-	auto ccs = ra->evaluate_columns(get_x(x_labs), get_y());
+	auto ccs = ra.evaluate_columns(get_x(x_labs), get_y());
 	REQUIRE(ccs.size() == get_x(x_labs).n_cols);
 
 	for (ColumnContribution cc : ccs) {
