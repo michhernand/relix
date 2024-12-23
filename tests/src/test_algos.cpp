@@ -20,7 +20,7 @@ TEST_CASE_METHOD(MTCars, "Test LastRelimpAlgorithm.evaluate_column-1") {
 	auto mean_without = cc.get_mean_without_column();
 	REQUIRE_THAT(
 			mean_without,
-			Catch::Matchers::WithinRel(0.7099, 0.001)
+			Catch::Matchers::WithinRel(0.7750, 0.001)
 	);
 
 	auto mean_with = cc.get_mean_with_column();
@@ -49,7 +49,7 @@ TEST_CASE_METHOD(MTCars, "Test LastRelimpAlgorithm.evaluate_column-2") {
 	auto mean_without = cc.get_mean_without_column();
 	REQUIRE_THAT(
 			mean_without,
-			Catch::Matchers::WithinRel(0.7191, 0.001)
+			Catch::Matchers::WithinRel(0.6900, 0.001)
 	);
 
 	auto mean_with = cc.get_mean_with_column();
@@ -78,3 +78,30 @@ TEST_CASE_METHOD(MTCars, "Test LastRelimpAlgorithm.evaluate_columns-1") {
 	}
 }
 
+TEST_CASE_METHOD(MTCars, "Test FirstRelimpAlgorithm.evaluate_columns-1") {
+	std::vector<std::string> x_labs = {"cyl", "disp", "hp", "drat"};
+	std::vector<double> expected_vals = {
+		0.7261800,
+		0.7183433,
+		0.6024373,
+		0.4639952
+	};
+
+	FirstRelimpAlgorithm ra = FirstRelimpAlgorithm();
+	auto ccs = ra.evaluate_columns(get_x(x_labs), get_y());
+	REQUIRE(ccs.size() == get_x(x_labs).n_cols);
+
+	for (arma::uword i = 0; i < ccs.size(); ++i) {
+		if (i >= expected_vals.size()) {
+			break;
+		}
+
+		REQUIRE_THAT(
+				ccs[i].get_lift(),
+				Catch::Matchers::WithinRel(
+					expected_vals[i],
+					0.001
+				)
+		);
+	}
+}

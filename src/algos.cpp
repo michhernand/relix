@@ -79,3 +79,63 @@ std::vector<ColumnContribution> LastRelimpAlgorithm::evaluate_columns(
 	}
 	return ccs;
 }
+
+FirstRelimpAlgorithm::FirstRelimpAlgorithm() {}
+
+double FirstRelimpAlgorithm::get_sum_rsquared(arma::dmat x, arma::dvec y) {
+	arma::dvec r_squared_values = arma::zeros(x.n_cols);
+	for (arma::uword i; i < x.n_cols; ++i) {
+		Model mod = basic_lm(x.col(i), y);
+		r_squared_values[i] = mod.r_squared;
+	}
+	return arma::accu(r_squared_values);
+}
+
+ColumnContribution FirstRelimpAlgorithm::evaluate_column(
+		arma::dmat x,
+		arma::dvec y,
+		arma::uword column_index,
+		Model full_model
+) {
+	if (column_index >= x.n_cols) {
+		throw std::runtime_error("tried to access an invalid column of x");
+	}
+
+	arma::uvec column_index_vec = {column_index};
+	arma::dmat xx = add_intercept(x.cols(column_index_vec));
+
+	Model partial_model = basic_lm(xx, y);
+
+	auto cc = ColumnContribution(column_index, 1);;
+	cc.set_next(partial_model.r_squared, 0);
+
+	return cc;
+}
+
+std::vector<ColumnContribution> FirstRelimpAlgorithm::evaluate_columns(
+		arma::dmat x,
+		arma::dvec y
+) {
+	if (x.n_cols == 0) {
+		throw std::runtime_error("x has no columns");
+	}
+
+	std::vector<ColumnContribution> ccs;
+	ccs.resize(x.n_cols, ColumnContribution(0, 0));
+
+	arma::dvec coefficients;
+	arma::dvec fitted_values;
+	arma::dvec residuals;
+
+	Model full_model = Model(
+			coefficients,
+			fitted_values,
+			residuals,
+			get_sum_rsquared(x, y)
+	);
+
+	for (arma::uword i = 0; i < x.n_cols; ++i) {
+		ccs[i] = this->evaluate_column(x, y, i, full_model);
+	}
+	return ccs;
+}
