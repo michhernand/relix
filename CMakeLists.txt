@@ -26,7 +26,6 @@ if(USE_R_LIBS)
 	message(STATUS "Rcpp include paths: ${RCPP_INCLUDES}")
 
 	add_library(relix_lib
-		src/cc.cpp
 		src/lm.cpp
 		src/algos.cpp
 		src/relix.cpp
@@ -34,7 +33,6 @@ if(USE_R_LIBS)
 	)
 else()
 	add_library(relix_lib
-		src/cc.cpp
 		src/lm.cpp
 		src/algos.cpp
 		src/relix.cpp

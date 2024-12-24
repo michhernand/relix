@@ -13,7 +13,7 @@ Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
 // relix_r
-Rcpp::List relix_r(Rcpp::NumericMatrix x, Rcpp::NumericVector y);
+Rcpp::NumericVector relix_r(Rcpp::NumericMatrix x, Rcpp::NumericVector y);
 RcppExport SEXP _relix_relix_r(SEXP xSEXP, SEXP ySEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
