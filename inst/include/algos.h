@@ -2,8 +2,6 @@
 #define ALGOS_H
 
 #include <armadillo>
-#include "cc.h"
-#include "lm.h"
 
 /**
 * @brief Relative Importance algorithm to rank importance of linear model results.
@@ -11,53 +9,69 @@
 class RelimpAlgorithm {
 	public:
 		virtual ~RelimpAlgorithm() = default;
-		virtual ColumnContribution evaluate_column(
-				arma::dmat x, 
-				arma::dvec y, 
-				arma::uword column_index,
-				Model full_model
-		) = 0;
 
-		virtual std::vector<ColumnContribution> evaluate_columns(
-				arma::dmat x, 
-				arma::dvec y
+		/**
+		* @brief Calculates rsq in excess of baseline for all cols.
+		* @param x The independent variables of the regression.
+		* @param y The dependent variable of the regression.
+		* @return The excess r-squared for all cols.
+		*/
+		virtual arma::dvec evaluate_columns(
+				const arma::dmat& x, 
+				const arma::dvec& y
 		) = 0;
 };
 
 class LastRelimpAlgorithm : public RelimpAlgorithm {
+	private:
+		bool intercept;
 	public:
 		LastRelimpAlgorithm();
-		ColumnContribution evaluate_column(
-				arma::dmat x, 
-				arma::dvec y, 
-				arma::uword column_index,
-				Model full_model
-		) override;
 
-		std::vector<ColumnContribution> evaluate_columns(
-				arma::dmat x, 
-				arma::dvec y
+		/**
+		* @brief Calculates rsq in excess of baseline.
+		* @param x The independent variables of the regression.
+		* @param y The dependent variable of the regression.
+		* @param i The index of the col to evaluate.
+		* @param baseline_rsq The baseline r-squared to compare against.
+		* @return The excess r-squared.
+		*/
+		double evaluate_column(
+				const arma::dmat& x, 
+				const arma::dvec& y, 
+				const arma::uword i,
+				const double baseline_rsq
+		);
+
+		arma::dvec evaluate_columns(
+				const arma::dmat& x, 
+				const arma::dvec& y
 		) override;
 };
 
 class FirstRelimpAlgorithm : public RelimpAlgorithm {
 	private:
-		double get_sum_rsquared(
-				arma::dmat x,
-				arma::dvec y
-		);
+		bool intercept;
 	public:
-		FirstRelimpAlgorithm();
-		ColumnContribution evaluate_column(
-				arma::dmat x,
-				arma::dvec y,
-				arma::uword column_index,
-				Model full_model
-		) override;
+		FirstRelimpAlgorithm(const bool intercept);
 
-		std::vector<ColumnContribution> evaluate_columns(
-				arma::dmat x,
-				arma::dvec y
+		/**
+		* @brief Calculates rsq in excess of baseline.
+		* @param x The independent variables of the regression.
+		* @param y The dependent variable of the regression.
+		* @param i The index of the col to evaluate.
+		* @param baseline_rsq The baseline r-squared to compare against.
+		* @return The excess r-squared.
+		*/
+		double evaluate_column(
+				const arma::dmat& x,
+				const arma::dvec& y,
+				const arma::uword i
+		);
+
+		arma::dvec evaluate_columns(
+				const arma::dmat& x,
+				const arma::dvec& y
 		) override;
 };
 

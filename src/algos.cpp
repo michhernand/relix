@@ -2,7 +2,6 @@
 #include <algorithm>
 #include <stdexcept>
 #include <vector>
-#include "cc.h"
 #include "lm.h"
 #include "algos.h"
 
@@ -27,33 +26,39 @@ arma::uvec argsort_array(const arma::dvec& arr, bool desc) {
     return indices;
 }
 
+/**
+* @brief Selects all columns of x except for i.
+* @param x The matrix to select columns from.
+* @param i The column to omit.
+* @return A arma::dmat containing all columns except for i.
+*/
+arma::dmat select_except(const arma::dmat& x, arma::uword i) {
+	const arma::uword n = x.n_cols - 1;
+	arma::uvec cols = arma::regspace<arma::uvec>(0, n);
+	cols.shed_row(i);
+	return x.cols(cols);
+}
+
 LastRelimpAlgorithm::LastRelimpAlgorithm() {}
 
 /**
 * @brief Gathers r-squared values to eval the importance of a value of x.
 * @param x The x matrix (independent variables) of the model.
 * @param y The y vector (dependent variable) of the model.
-* @param column_index The column being evaluated.
-* @return A ColumnContribution object tracking the columns importance.
+* @param i The column being evaluated.
+* @param baseline_rsq The baseline r-squared for comparison.
+* @return The excess r-squared of the baseline.
 */
-ColumnContribution LastRelimpAlgorithm::evaluate_column(
-		arma::dmat x,
-		arma::dvec y,
-		arma::uword column_index,
-		Model full_model
+double LastRelimpAlgorithm::evaluate_column(
+		const arma::dmat& x,
+		const arma::dvec& y,
+		const arma::uword i,
+		const double baseline_rsq
 ) {
-	if (column_index >= x.n_cols) {
+	if (i >= x.n_cols) {
 		throw std::runtime_error("tried to access an invalid column of x");
 	}
-
-	x.shed_col(column_index);
-
-	Model partial_model = basic_lm(x, y);
-
-	auto cc = ColumnContribution(column_index, 1);
-	cc.set_next(full_model.r_squared, partial_model.r_squared);
-
-	return cc;
+	return baseline_rsq - basic_lm(select_except(x, i), y);
 }
 
 /**
@@ -62,80 +67,68 @@ ColumnContribution LastRelimpAlgorithm::evaluate_column(
 * @param y The y vector (dependent variable) of the model.
 * @return A vector of ColumnContribution objects (one per x column).
 */
-std::vector<ColumnContribution> LastRelimpAlgorithm::evaluate_columns(
-		arma::dmat x,
-		arma::dvec y
+arma::dvec LastRelimpAlgorithm::evaluate_columns(
+		const arma::dmat& x,
+		const arma::dvec& y
 ) {
 	if (x.n_cols == 0) {
 		throw std::runtime_error("x has no columns");
 	}
 
-	std::vector<ColumnContribution> ccs;
-	ccs.resize(x.n_cols, ColumnContribution(0, 0));
+	double baseline_rsq = basic_lm(x, y);
 
-	Model full_model = basic_lm(x, y);
+	arma::dvec rsqs = arma::zeros(x.n_cols);
 	for (arma::uword i = 0; i < x.n_cols; ++i) {
-		ccs[i] = evaluate_column(x, y, i, full_model);
+		rsqs[i] = this->evaluate_column(x, y, i, baseline_rsq);
 	}
-	return ccs;
+	return rsqs;
 }
 
-FirstRelimpAlgorithm::FirstRelimpAlgorithm() {}
-
-double FirstRelimpAlgorithm::get_sum_rsquared(arma::dmat x, arma::dvec y) {
-	arma::dvec r_squared_values = arma::zeros(x.n_cols);
-	for (arma::uword i; i < x.n_cols; ++i) {
-		Model mod = basic_lm(x.col(i), y);
-		r_squared_values[i] = mod.r_squared;
-	}
-	return arma::accu(r_squared_values);
+FirstRelimpAlgorithm::FirstRelimpAlgorithm(const bool intercept) {
+	this->intercept = intercept;
 }
 
-ColumnContribution FirstRelimpAlgorithm::evaluate_column(
-		arma::dmat x,
-		arma::dvec y,
-		arma::uword column_index,
-		Model full_model
+
+/**
+* @brief Gathers r-squared values to eval the importance of a value of x.
+* @param x The x matrix (independent variables) of the model.
+* @param y The y vector (dependent variable) of the model.
+* @param i The column being evaluated.
+* @return The excess r-squared of the baseline.
+*/
+double FirstRelimpAlgorithm::evaluate_column(
+		const arma::dmat& x,
+		const arma::dvec& y,
+		const arma::uword i
 ) {
-	if (column_index >= x.n_cols) {
+	if (i >= x.n_cols) {
 		throw std::runtime_error("tried to access an invalid column of x");
 	}
 
-	arma::uvec column_index_vec = {column_index};
-	arma::dmat xx = add_intercept(x.cols(column_index_vec));
-
-	Model partial_model = basic_lm(xx, y);
-
-	auto cc = ColumnContribution(column_index, 1);;
-	cc.set_next(partial_model.r_squared, 0);
-
-	return cc;
+	if (this->intercept) {
+		return basic_lm(add_intercept(x.col(i)), y);
+	} else {
+		return basic_lm(x.col(i), y);
+	}
 }
 
-std::vector<ColumnContribution> FirstRelimpAlgorithm::evaluate_columns(
-		arma::dmat x,
-		arma::dvec y
+/**
+* @brief Gathers r-squared values evaluating the importance of all x columns.
+* @param x The x matrix (independent variables) of the model.
+* @param y The y vector (dependent variable) of the model.
+* @return A vector of ColumnContribution objects (one per x column).
+*/
+arma::dvec FirstRelimpAlgorithm::evaluate_columns(
+		const arma::dmat& x,
+		const arma::dvec& y
 ) {
 	if (x.n_cols == 0) {
 		throw std::runtime_error("x has no columns");
 	}
 
-	std::vector<ColumnContribution> ccs;
-	ccs.resize(x.n_cols, ColumnContribution(0, 0));
-
-	arma::dvec coefficients;
-	arma::dvec fitted_values;
-	arma::dvec residuals;
-
-	Model full_model = Model(
-			coefficients,
-			fitted_values,
-			residuals,
-			get_sum_rsquared(x, y)
-	);
-
+	arma::dvec rsqs = arma::zeros(x.n_cols);
 	for (arma::uword i = 0; i < x.n_cols; ++i) {
-		ccs[i] = this->evaluate_column(x, y, i, full_model);
+		rsqs[i] = this->evaluate_column(x, y, i);
 	}
-	return ccs;
+	return rsqs;
 }

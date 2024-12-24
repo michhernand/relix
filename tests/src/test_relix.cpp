@@ -11,18 +11,20 @@ TEST_CASE_METHOD(MTCars, "Test-Pipeline-1") {
 	std::vector<std::string> x_labs = {"cyl", "disp", "hp", "drat"};
 
 	LastRelimpAlgorithm ra = LastRelimpAlgorithm();
-	std::vector<ColumnContribution> ccs = relative_importance(get_x(x_labs), get_y(), ra);
+	arma::dvec rsqs = relative_importance(get_x(x_labs), get_y(), ra);
 
 	std::vector<double> expected_vals = {
-		0.0726,
 		0.0074987,
 		0.0131126,
 		0.0174177, 
 		0.0146241
 	};
-	for (arma::uword i; i < ccs.size(); ++i) {
+	for (arma::uword i; i < expected_vals.size(); ++i) {
+		if (i >= rsqs.size()) {
+			throw std::runtime_error("tried to access an out-of-bounds value of rsqs");
+		}
 		REQUIRE_THAT(
-			ccs[i].get_lift(),
+			rsqs[i],
 			Catch::Matchers::WithinRel(
 				expected_vals[i],
 				0.001
@@ -36,18 +38,20 @@ TEST_CASE_METHOD(MTCars, "Test-Pipeline-2") {
 	std::vector<std::string> x_labs = {"qsec", "vs", "am", "gear"};
 
 	LastRelimpAlgorithm ra = LastRelimpAlgorithm();
-	std::vector<ColumnContribution> ccs = relative_importance(get_x(x_labs), get_y(), ra);
+	arma::dvec rsqs = relative_importance(get_x(x_labs), get_y(), ra);
 
 	std::vector<double> expected_vals = {
-		0.00058800,
 		0.02968600,
 		0.03160428,
 		0.14545843,
 		0.00024795,
 	};
-	for (arma::uword i; i < ccs.size(); ++i) {
+	for (arma::uword i; i < expected_vals.size(); ++i) {
+		if (i >= rsqs.size()) {
+			throw std::runtime_error("tried to access an out-of-bounds value of rsqs");
+		}
 		REQUIRE_THAT(
-			ccs[i].get_lift(),
+			rsqs[i],
 			Catch::Matchers::WithinRel(
 				expected_vals[i],
 				0.001

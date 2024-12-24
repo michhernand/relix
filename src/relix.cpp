@@ -2,7 +2,6 @@
 #include <memory>
 #include <stdexcept>
 #include "algos.h"
-#include "cc.h"
 
 std::unique_ptr<RelimpAlgorithm> get_algo(std::string& algo) {
 	if (algo == "last") {
@@ -12,20 +11,21 @@ std::unique_ptr<RelimpAlgorithm> get_algo(std::string& algo) {
 }
 
 
-std::vector<ColumnContribution> relative_importance(
+arma::dvec relative_importance(
 		const arma::dmat& x, 
 		const arma::dvec& y, 
 		RelimpAlgorithm& algo
 ) {
-	std::vector<ColumnContribution> ccs = algo.evaluate_columns(x, y);
-	return ccs;
+	arma::dvec rsqs = algo.evaluate_columns(x, y);
+	return rsqs;
 }
 
-std::vector<ColumnContribution> relative_importance(
+arma::dvec relative_importance(
 		const arma::dmat& x,
 		const arma::dmat& y,
 		std::string& algo
 ) {
+
 	std::unique_ptr<RelimpAlgorithm> algoObj = get_algo(algo);
 	auto ccs = algoObj->evaluate_columns(x, y);
 	return ccs;

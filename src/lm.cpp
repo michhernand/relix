@@ -7,7 +7,7 @@ arma::dmat add_intercept(const arma::dmat& x) {
 
 }
 
-Model basic_lm(const arma::dmat& x, const arma::dvec& y) {
+double basic_lm(const arma::dmat& x, const arma::dvec& y) {
     arma::vec beta = arma::solve(arma::trans(x) * x, arma::trans(x) * y);
     arma::vec y_pred = x * beta;
     arma::vec residuals = y - y_pred;
@@ -16,7 +16,6 @@ Model basic_lm(const arma::dmat& x, const arma::dvec& y) {
     double ss_tot = arma::accu(arma::square(y - arma::mean(y)));
     
     double r_squared = 1 - (ss_res / ss_tot);
-
-    return Model(beta, y_pred, residuals, r_squared);
+    return r_squared;
 }
 
