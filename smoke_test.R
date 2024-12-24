@@ -1,5 +1,7 @@
-library("relix")
-
+#!/bin/bash
 fit <- lm("mpg ~ disp + hp + drat", data = mtcars)
-output <- relix(fit, "last", intercept = FALSE)
-print(output)
+
+relix_func <- function() {
+	relix::relix(fit, "first", intercept = FALSE)
+}
+relix_func()
