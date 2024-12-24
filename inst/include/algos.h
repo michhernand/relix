@@ -28,21 +28,6 @@ class LastRelimpAlgorithm : public RelimpAlgorithm {
 	public:
 		LastRelimpAlgorithm();
 
-		/**
-		* @brief Calculates rsq in excess of baseline.
-		* @param x The independent variables of the regression.
-		* @param y The dependent variable of the regression.
-		* @param i The index of the col to evaluate.
-		* @param baseline_rsq The baseline r-squared to compare against.
-		* @return The excess r-squared.
-		*/
-		double evaluate_column(
-				const arma::dmat& x, 
-				const arma::dvec& y, 
-				const arma::uword i,
-				const double baseline_rsq
-		);
-
 		arma::dvec evaluate_columns(
 				const arma::dmat& x, 
 				const arma::dvec& y
