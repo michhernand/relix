@@ -13,20 +13,22 @@ Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
 // relix_r
-Rcpp::NumericVector relix_r(Rcpp::NumericMatrix x, Rcpp::NumericVector y);
-RcppExport SEXP _relix_relix_r(SEXP xSEXP, SEXP ySEXP) {
+Rcpp::NumericVector relix_r(Rcpp::NumericMatrix x, Rcpp::NumericVector y, std::string type, bool intercept);
+RcppExport SEXP _relix_relix_r(SEXP xSEXP, SEXP ySEXP, SEXP typeSEXP, SEXP interceptSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type x(xSEXP);
     Rcpp::traits::input_parameter< Rcpp::NumericVector >::type y(ySEXP);
-    rcpp_result_gen = Rcpp::wrap(relix_r(x, y));
+    Rcpp::traits::input_parameter< std::string >::type type(typeSEXP);
+    Rcpp::traits::input_parameter< bool >::type intercept(interceptSEXP);
+    rcpp_result_gen = Rcpp::wrap(relix_r(x, y, type, intercept));
     return rcpp_result_gen;
 END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_relix_relix_r", (DL_FUNC) &_relix_relix_r, 2},
+    {"_relix_relix_r", (DL_FUNC) &_relix_relix_r, 4},
     {NULL, NULL, 0}
 };
 

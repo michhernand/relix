@@ -2,11 +2,11 @@
 fit <- lm("mpg ~ cyl + disp + hp + drat", data = mtcars)
 
 relix_func <- function() {
-	print(relix::relix(fit, "first", intercept = TRUE))
+	print(relix::relix(fit, "last", intercept = TRUE))
 }
 
 relaimpo_func <- function() {
-	print(relaimpo::calc.relimp(fit, type = "first"))
+	print(relaimpo::calc.relimp(fit, type = "last"))
 }
 
 print("RELAIMPO")

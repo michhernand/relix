@@ -11,11 +11,19 @@
 // [[Rcpp::export]]
 Rcpp::NumericVector relix_r(
 		Rcpp::NumericMatrix x,
-		Rcpp::NumericVector y
+		Rcpp::NumericVector y,
+		std::string type,
+		bool intercept
 ) {
 	arma::dmat x_arma = Rcpp::as<arma::dmat>(x);
 	arma::dvec y_arma = Rcpp::as<arma::dvec>(y);
 
-	LastRelimpAlgorithm ra = LastRelimpAlgorithm();
-	return Rcpp::wrap(relative_importance(x_arma, y_arma, ra));
+	std::unique_ptr<RelimpAlgorithm> ra; 
+
+	if (type == "last") {
+		ra = std::make_unique<LastRelimpAlgorithm>();
+	} else if (type == "first") {
+		ra = std::make_unique<FirstRelimpAlgorithm>(intercept);
+	}
+	return Rcpp::wrap(relative_importance(x_arma, y_arma, *ra));
 }
