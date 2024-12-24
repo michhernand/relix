@@ -3,25 +3,40 @@
 # Define directories and files to clean
 BUILD_DIR="build"
 CACHE_DIR=".cache"
-CACHE_FILES=("CMakeCache.txt" "compile_commands.json" "CMakeFiles" "*.o" "*.so" "*.a" "*.log" "relix_*.tar.gz")
+DEPS_DIR="_deps"
+RCMD_CHECK_DIR="relix.Rcheck"
+
+CACHE_FILES=("CMakeCache.txt" "cmake_install.cmake" "compile_commands.json" "CMakeFiles" "*.o" "*.so" "*.a" "*.log" "relix_*.tar.gz")
 TEMP_FILES=("*~" "*.swp" "*.bak")
 
 echo "Starting cleanup..."
 
-# Remove the build directory
 if [ -d "$CACHE_DIR" ]; then
-	echo "Removing .cache directory: $CACHE_DIR"
+	echo "Removing cache directory: $CACHE_DIR"
 	rm -rf "$CACHE_DIR"
 else
-	echo "No build directory found."
+	echo "No cache directory found."
 fi
 
-# Remove the build directory
 if [ -d "$BUILD_DIR" ]; then
 	echo "Removing build directory: $BUILD_DIR"
 	rm -rf "$BUILD_DIR"
 else
 	echo "No build directory found."
+fi
+
+if [ -d "$DEPS_DIR" ]; then
+	echo "Removing deps directory: $DEPS_DIR"
+	rm -rf "$DEPS_DIR"
+else
+	echo "No deps directory found."
+fi
+
+if [ -d "$RCMD_CHECK_DIR" ]; then
+	echo "Removing r cmd check directory: $RCMD_CHECK_DIR"
+	rm -rf "$RCMD_CHECK_DIR"
+else
+	echo "No r cmd check directory found."
 fi
 
 # Remove CMake cache and generated files
