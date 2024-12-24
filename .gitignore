@@ -56,4 +56,6 @@ _deps
 .cache/
 build/
 DartConfiguration.tcl
-*/**.cmake
+**/*.cmake
+relix.Rcheck/
+**/*.tar.gz
