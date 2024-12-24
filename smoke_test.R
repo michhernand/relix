@@ -1,7 +1,16 @@
 #!/bin/bash
-fit <- lm("mpg ~ disp + hp + drat", data = mtcars)
+fit <- lm("mpg ~ cyl + disp + hp + drat", data = mtcars)
 
 relix_func <- function() {
-	relix::relix(fit, "first", intercept = FALSE)
+	print(relix::relix(fit, "first", intercept = TRUE))
 }
+
+relaimpo_func <- function() {
+	print(relaimpo::calc.relimp(fit, type = "first"))
+}
+
+print("RELAIMPO")
+relaimpo_func()
+print("RELIX")
 relix_func()
+

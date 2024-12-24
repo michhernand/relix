@@ -7,17 +7,17 @@
 #include "algos.h"
 #include "fixtures/mtcars.h"
 
-TEST_CASE_METHOD(MTCars, "Test-Pipeline-1") {
+TEST_CASE_METHOD(MTCars, "Test-LastPipeline-1") {
 	std::vector<std::string> x_labs = {"cyl", "disp", "hp", "drat"};
 
 	LastRelimpAlgorithm ra = LastRelimpAlgorithm();
 	arma::dvec rsqs = relative_importance(get_x(x_labs), get_y(), ra);
 
 	std::vector<double> expected_vals = {
-		0.0074987,
-		0.0131126,
-		0.0174177, 
-		0.0146241
+		0.007498782,
+		0.0131126143,
+		0.0174177949,
+		0.0146241073
 	};
 	for (arma::uword i; i < expected_vals.size(); ++i) {
 		if (i >= rsqs.size()) {
@@ -34,17 +34,17 @@ TEST_CASE_METHOD(MTCars, "Test-Pipeline-1") {
 }
 
 
-TEST_CASE_METHOD(MTCars, "Test-Pipeline-2") {
-	std::vector<std::string> x_labs = {"qsec", "vs", "am", "gear"};
+TEST_CASE_METHOD(MTCars, "Test-FirstPipeline-1") {
+	std::vector<std::string> x_labs = {"cyl", "disp", "hp", "drat"};
 
-	LastRelimpAlgorithm ra = LastRelimpAlgorithm();
+	FirstRelimpAlgorithm ra = FirstRelimpAlgorithm(true);
 	arma::dvec rsqs = relative_importance(get_x(x_labs), get_y(), ra);
 
 	std::vector<double> expected_vals = {
-		0.02968600,
-		0.03160428,
-		0.14545843,
-		0.00024795,
+		0.7261800,
+		0.7183433,
+		0.6024373,
+		0.4639952
 	};
 	for (arma::uword i; i < expected_vals.size(); ++i) {
 		if (i >= rsqs.size()) {
