@@ -27,20 +27,20 @@ if(USE_R_LIBS)
 
 	add_library(relix_lib
 		src/lm.cpp
-		src/algos/base.cpp
-		src/algos/first.cpp
-		src/algos/last.cpp
-		src/algos/lmg.cpp
+		src/utils.cpp
+		src/algo_first.cpp
+		src/algo_last.cpp
+		src/algo_lmg.cpp
 		src/relix.cpp
 		src/relix_r.cpp
 	)
 else()
 	add_library(relix_lib
 		src/lm.cpp
-		src/algos/base.cpp
-		src/algos/first.cpp
-		src/algos/last.cpp
-		src/algos/lmg.cpp
+		src/utils.cpp
+		src/algo_first.cpp
+		src/algo_last.cpp
+		src/algo_lmg.cpp
 		src/relix.cpp
 	)
 endif()
