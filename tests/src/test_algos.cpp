@@ -62,30 +62,30 @@ TEST_CASE_METHOD(MTCars, "Test FirstRelimpAlgorithm.evaluate_columns-1") {
 	}
 }
 
-// TEST_CASE_METHOD(MTCars, "Test LMGRelimpAlgorithm.evaluate_columns-1") {
-// 	std::vector<std::string> x_labs = {"cyl", "disp", "hp", "drat"};
-// 	LMGRelimpAlgorithm ra = LMGRelimpAlgorithm(true, x_labs);
-// 	std::vector<double> expected_vals = {
-// 		0.2282286,
-// 		0.2272031,
-// 		0.1885536,
-// 		0.1385265
-// 	};
-//
-// 	arma::dvec rsqs = ra.evaluate_columns(get_x(x_labs), get_y());
-// 	REQUIRE(rsqs.size() == get_x(x_labs).n_cols);
-//
-// 	for (arma::uword i = 0; i < expected_vals.size(); ++i) {
-// 		if (i >= rsqs.size()) {
-// 			throw std::runtime_error("tried to access an out-of-bounds value of rsqs");
-// 		}
-//
-// 		REQUIRE_THAT(
-// 				rsqs[i],
-// 				Catch::Matchers::WithinRel(
-// 					expected_vals[i],
-// 					0.001
-// 				)
-// 		);
-// 	}
-// }
+TEST_CASE_METHOD(MTCars, "Test LMGRelimpAlgorithm.evaluate_columns-1") {
+	std::vector<std::string> x_labs = {"cyl", "disp", "hp", "drat"};
+	LMGRelimpAlgorithm ra = LMGRelimpAlgorithm(true, x_labs);
+	std::vector<double> expected_vals = {
+		0.2282286,
+		0.2272031,
+		0.1885536,
+		0.1385265
+	};
+
+	arma::dvec rsqs = ra.evaluate_columns(get_x(x_labs), get_y());
+	REQUIRE(rsqs.size() == get_x(x_labs).n_cols);
+
+	for (arma::uword i = 0; i < expected_vals.size(); ++i) {
+		if (i >= rsqs.size()) {
+			throw std::runtime_error("tried to access an out-of-bounds value of rsqs");
+		}
+
+		REQUIRE_THAT(
+				rsqs[i],
+				Catch::Matchers::WithinRel(
+					expected_vals[i],
+					0.001
+				)
+		);
+	}
+}
