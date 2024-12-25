@@ -5,8 +5,9 @@
 
 
 
-const std::string ERR_MSG = "tried to access an invalid column of x";
+const std::string OOR_MSG = "tried to access an invalid column of x";
 
+const std::string IA_MSG = "x has no columns";
 
 /**
 * @brief Selects all columns of x except for i.
@@ -35,7 +36,7 @@ arma::dvec LastRelimpAlgorithm::evaluate_columns(
 		const arma::dvec& y
 ) {
 	if (x.n_cols == 0) {
-		throw std::runtime_error("x has no columns");
+		throw std::invalid_argument(IA_MSG);
 	}
 
 	double baseline_rsq = basic_lm(x, y);
@@ -43,7 +44,7 @@ arma::dvec LastRelimpAlgorithm::evaluate_columns(
 	arma::dvec rsqs = arma::zeros(x.n_cols);
 	for (arma::uword i = 0; i < x.n_cols; ++i) {
 		if (i >= x.n_cols) {
-			throw std::runtime_error(ERR_MSG);
+			throw std::out_of_range(OOR_MSG);
 		}
 		rsqs[i] = baseline_rsq - basic_lm(select_except(x, i), y);
 	}
@@ -65,13 +66,13 @@ arma::dvec FirstRelimpAlgorithm::evaluate_columns(
 		const arma::dvec& y
 ) {
 	if (x.n_cols == 0) {
-		throw std::runtime_error("x has no columns");
+		throw std::invalid_argument(IA_MSG);
 	}
 
 	arma::dvec rsqs = arma::zeros(x.n_cols);
 	for (arma::uword i = 0; i < x.n_cols; ++i) {
 		if (i >= x.n_cols) {
-			throw std::runtime_error(ERR_MSG);
+			throw std::out_of_range(OOR_MSG);
 		}
 		if (this->intercept) {
 			rsqs[i] = basic_lm(add_intercept(x.col(i)), y);

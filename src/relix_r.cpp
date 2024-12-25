@@ -25,5 +25,13 @@ Rcpp::NumericVector relix_r(
 	} else if (type == "first") {
 		ra = std::make_unique<FirstRelimpAlgorithm>(intercept);
 	}
-	return Rcpp::wrap(relative_importance(x_arma, y_arma, *ra));
+
+	try {
+		return Rcpp::wrap(relative_importance(x_arma, y_arma, *ra));
+	} catch(const std::out_of_range& oor) {
+		Rcpp::Rcerr << oor.what();
+	} catch(const std::invalid_argument& ia) {
+		Rcpp::Rcerr << ia.what();
+	}
+	return Rcpp::NumericVector();
 }
