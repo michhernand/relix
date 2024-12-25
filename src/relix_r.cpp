@@ -24,6 +24,11 @@ Rcpp::NumericVector relix_r(
 		ra = std::make_unique<LastRelimpAlgorithm>();
 	} else if (type == "first") {
 		ra = std::make_unique<FirstRelimpAlgorithm>(intercept);
+	} else if (type == "lmg") {
+		ra = std::make_unique<LMGRelimpAlgorithm>(intercept);
+	} else {
+		Rcpp::Rcerr << "invlaid type argument";
+		return Rcpp::NumericVector();
 	}
 
 	try {

@@ -2,6 +2,24 @@
 #define ALGOS_H
 
 #include <armadillo>
+#include <string>
+#include <vector>
+
+const std::string OOR_MSG = "tried to access an invalid column of x";
+
+const std::string IA_MSG = "x has no columns";
+
+arma::uvec select_except(const arma::dmat& x, arma::uword skip_col);
+
+std::vector<std::string> get_headers(
+		const arma::uvec ixs,
+		const std::vector<std::string> headers
+);
+
+std::string get_headers_string(
+		const arma::uvec ixs,
+		const std::vector<std::string> headers
+);
 
 /**
 * @brief Relative Importance algorithm to rank importance of linear model results.
@@ -25,8 +43,12 @@ class RelimpAlgorithm {
 class LastRelimpAlgorithm : public RelimpAlgorithm {
 	private:
 		bool intercept;
+		std::vector<std::string> headers;
 	public:
-		LastRelimpAlgorithm();
+		LastRelimpAlgorithm(
+				bool intercept,
+				std::vector<std::string> headers = {}
+		);
 
 		arma::dvec evaluate_columns(
 				const arma::dmat& x, 
@@ -37,8 +59,12 @@ class LastRelimpAlgorithm : public RelimpAlgorithm {
 class FirstRelimpAlgorithm : public RelimpAlgorithm {
 	private:
 		bool intercept;
+		std::vector<std::string> headers;
 	public:
-		FirstRelimpAlgorithm(const bool intercept);
+		FirstRelimpAlgorithm(
+				bool intercept,
+				std::vector<std::string> headers = {}
+		);
 
 		arma::dvec evaluate_columns(
 				const arma::dmat& x,
@@ -49,8 +75,13 @@ class FirstRelimpAlgorithm : public RelimpAlgorithm {
 class LMGRelimpAlgorithm : public RelimpAlgorithm {
 	private:
 		bool intercept;
+		std::vector<std::string> headers;
+
 	public:
-		LMGRelimpAlgorithm(const bool intercept);
+		LMGRelimpAlgorithm(
+				bool intercept,
+				std::vector<std::string> headers = {}
+		);
 
 		/**
 		* @brief Calculates rsq of a single predictor.

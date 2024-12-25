@@ -10,7 +10,7 @@
 TEST_CASE_METHOD(MTCars, "Test-LastPipeline-1") {
 	std::vector<std::string> x_labs = {"cyl", "disp", "hp", "drat"};
 
-	LastRelimpAlgorithm ra = LastRelimpAlgorithm();
+	LastRelimpAlgorithm ra = LastRelimpAlgorithm(true, x_labs);
 	arma::dvec rsqs = relative_importance(get_x(x_labs), get_y(), ra);
 
 	std::vector<double> expected_vals = {
@@ -37,7 +37,7 @@ TEST_CASE_METHOD(MTCars, "Test-LastPipeline-1") {
 TEST_CASE_METHOD(MTCars, "Test-FirstPipeline-1") {
 	std::vector<std::string> x_labs = {"cyl", "disp", "hp", "drat"};
 
-	FirstRelimpAlgorithm ra = FirstRelimpAlgorithm(true);
+	FirstRelimpAlgorithm ra = FirstRelimpAlgorithm(true, x_labs);
 	arma::dvec rsqs = relative_importance(get_x(x_labs), get_y(), ra);
 
 	std::vector<double> expected_vals = {
