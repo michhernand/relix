@@ -40,13 +40,24 @@ class FirstRelimpAlgorithm : public RelimpAlgorithm {
 	public:
 		FirstRelimpAlgorithm(const bool intercept);
 
+		arma::dvec evaluate_columns(
+				const arma::dmat& x,
+				const arma::dvec& y
+		) override;
+};
+
+class LMGRelimpAlgorithm : public RelimpAlgorithm {
+	private:
+		bool intercept;
+	public:
+		LMGRelimpAlgorithm(const bool intercept);
+
 		/**
-		* @brief Calculates rsq in excess of baseline.
+		* @brief Calculates rsq of a single predictor.
 		* @param x The independent variables of the regression.
 		* @param y The dependent variable of the regression.
 		* @param i The index of the col to evaluate.
-		* @param baseline_rsq The baseline r-squared to compare against.
-		* @return The excess r-squared.
+		* @return The r-squared.
 		*/
 		double evaluate_column(
 				const arma::dmat& x,
