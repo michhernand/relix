@@ -5,13 +5,11 @@
 #include "lm.h"
 #include "algos.h"
 
-FirstRelimpAlgorithm::FirstRelimpAlgorithm(
-		const bool intercept,
+LastRelimpAlgorithm::LastRelimpAlgorithm(
+		bool intercept,
 		std::vector<std::string> headers 
-) {
-	this->intercept = intercept;
-	this->headers = headers;
-}
+) : intercept(intercept), headers(headers) {}
+
 
 /**
 * @brief Gathers r-squared values evaluating the importance of all x columns.
@@ -19,7 +17,7 @@ FirstRelimpAlgorithm::FirstRelimpAlgorithm(
 * @param y The y vector (dependent variable) of the model.
 * @return A vector of ColumnContribution objects (one per x column).
 */
-arma::dvec FirstRelimpAlgorithm::evaluate_columns(
+arma::dvec LastRelimpAlgorithm::evaluate_columns(
 		const arma::dmat& x,
 		const arma::dvec& y
 ) {
@@ -27,13 +25,13 @@ arma::dvec FirstRelimpAlgorithm::evaluate_columns(
 		throw std::invalid_argument(IA_MSG);
 	}
 
+	double baseline_rsq = basic_lm(x, y);
+
 	arma::dvec rsqs = arma::zeros(x.n_cols);
 	for (arma::uword i = 0; i < x.n_cols; ++i) {
-		if (this->intercept) {
-			rsqs[i] = basic_lm(add_intercept(x.col(i)), y);
-		} else {
-			rsqs[i] = basic_lm(x.col(i), y);
-		}
+		double rsq = basic_lm(x.cols(select_except(x, i)), y);
+		rsqs[i] = baseline_rsq - rsq;
 	}
 	return rsqs;
 }
+

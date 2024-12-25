@@ -2,6 +2,8 @@
 #define ARMA_64BIT_WORD
 #endif
 
+#include <string>
+#include <vector>
 #include <RcppArmadillo.h>
 // [[Rcpp::depends(RcppArmadillo)]]
 
@@ -21,11 +23,11 @@ Rcpp::NumericVector relix_r(
 	std::unique_ptr<RelimpAlgorithm> ra; 
 
 	if (type == "last") {
-		ra = std::make_unique<LastRelimpAlgorithm>();
+		ra = std::make_unique<LastRelimpAlgorithm>(intercept, std::vector<std::string>{});
 	} else if (type == "first") {
-		ra = std::make_unique<FirstRelimpAlgorithm>(intercept);
+		ra = std::make_unique<FirstRelimpAlgorithm>(intercept, std::vector<std::string>{});
 	} else if (type == "lmg") {
-		ra = std::make_unique<LMGRelimpAlgorithm>(intercept);
+		ra = std::make_unique<LMGRelimpAlgorithm>(intercept, std::vector<std::string>{});
 	} else {
 		Rcpp::Rcerr << "invlaid type argument";
 		return Rcpp::NumericVector();

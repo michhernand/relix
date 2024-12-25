@@ -3,6 +3,34 @@
 #include <string>
 #include <vector>
 
+/**
+ * @brief Generate all possible combinations of all sizes from elements in values
+ * @param values Vector of values to generate combinations from
+ * @return Vector of uvec, each containing one combination of the input values
+ */
+std::vector<arma::uvec> generate_combinations(const arma::uvec& values) {
+	std::vector<arma::uvec> combinations;
+
+	// For each possible size k from 0 to n
+	for (arma::uword k = 1; k <= values.n_elem; ++k) {
+		std::vector<bool> v(values.n_elem);
+		std::fill(v.begin(), v.begin() + k, true);
+
+		do {
+			arma::uvec combination(k);
+			size_t idx = 0;
+			for (size_t i = 0; i < values.n_elem; ++i) {
+				if (v[i]) {
+					combination[idx++] = values(i);
+				}
+			}
+			
+			combinations.push_back(combination);
+		} while (std::prev_permutation(v.begin(), v.end()));
+	}
+
+	return combinations;
+}
 
 /**
 * @brief Selects all column indexes of x except for i.

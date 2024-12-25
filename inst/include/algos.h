@@ -9,6 +9,8 @@ const std::string OOR_MSG = "tried to access an invalid column of x";
 
 const std::string IA_MSG = "x has no columns";
 
+std::vector<arma::uvec> generate_combinations(const arma::uvec& values);
+
 arma::uvec select_except(const arma::dmat& x, arma::uword skip_col);
 
 std::vector<std::string> get_headers(
@@ -47,7 +49,7 @@ class LastRelimpAlgorithm : public RelimpAlgorithm {
 	public:
 		LastRelimpAlgorithm(
 				bool intercept,
-				std::vector<std::string> headers = {}
+				std::vector<std::string> headers
 		);
 
 		arma::dvec evaluate_columns(
@@ -63,7 +65,7 @@ class FirstRelimpAlgorithm : public RelimpAlgorithm {
 	public:
 		FirstRelimpAlgorithm(
 				bool intercept,
-				std::vector<std::string> headers = {}
+				std::vector<std::string> headers
 		);
 
 		arma::dvec evaluate_columns(
@@ -76,11 +78,10 @@ class LMGRelimpAlgorithm : public RelimpAlgorithm {
 	private:
 		bool intercept;
 		std::vector<std::string> headers;
-
 	public:
 		LMGRelimpAlgorithm(
 				bool intercept,
-				std::vector<std::string> headers = {}
+				std::vector<std::string> headers
 		);
 
 		/**

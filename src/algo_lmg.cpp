@@ -1,5 +1,4 @@
 #include <armadillo>
-#include <iostream>
 #include <stdexcept>
 #include <string>
 #include <vector>
@@ -8,40 +7,9 @@
 
 
 LMGRelimpAlgorithm::LMGRelimpAlgorithm(
-		const bool intercept,
-		std::vector<std::string> headers 
-) {
-	this->intercept = intercept;
-	this->headers = headers;
-}
-
-/**
- * @brief Generate all possible combinations of all sizes from elements in values
- * @param values Vector of values to generate combinations from
- * @return Vector of uvec, each containing one combination of the input values
- */
-std::vector<arma::uvec> generate_combinations(const arma::uvec& values) {
-	std::vector<arma::uvec> combinations;
-
-	// For each possible size k from 0 to n
-	for (arma::uword k = 0; k <= values.n_elem; ++k) {
-		std::vector<bool> v(values.n_elem);
-		std::fill(v.begin(), v.begin() + k, true);
-
-		do {
-			arma::uvec combination(k);
-			size_t idx = 0;
-			for (size_t i = 0; i < values.n_elem; ++i) {
-				if (v[i]) {
-					combination[idx++] = values(i);
-				}
-			}
-			combinations.push_back(combination);
-		} while (std::prev_permutation(v.begin(), v.end()));
-	}
-
-	return combinations;
-}
+		bool intercept,
+		std::vector<std::string> headers
+) : intercept(intercept), headers(headers) {}
 
 double LMGRelimpAlgorithm::evaluate_column(
 		const arma::dmat& x,
@@ -53,12 +21,6 @@ double LMGRelimpAlgorithm::evaluate_column(
 			select_except(x, i)
 	);
 
-	// std::cout << "Combos: " << combinations << std::endl;
-	std::cout << "COMBOS" << std::endl;
-	for (size_t j = 0; j < combinations.size(); ++j) {
-		std::cout << " " << j << ": " << combinations[j].t() << std::endl;
-	}
-	std::cout << "END" << std::endl;
 
 	double lmw;
 	double lmwo;
@@ -111,3 +73,4 @@ arma::dvec LMGRelimpAlgorithm::evaluate_columns(
 	}
 	return rsqs;
 }
+
