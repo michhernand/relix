@@ -5,11 +5,7 @@
 #include <string>
 #include <vector>
 
-const std::string OOR_MSG = "tried to access an invalid column of x";
-
 const std::string IA_MSG = "x has no columns";
-
-std::vector<arma::uvec> generate_combinations(const arma::uvec& values);
 
 arma::uvec select_except(const arma::dmat& x, arma::uword skip_col);
 
@@ -66,35 +62,6 @@ class FirstRelimpAlgorithm : public RelimpAlgorithm {
 		FirstRelimpAlgorithm(
 				bool intercept,
 				std::vector<std::string> headers
-		);
-
-		arma::dvec evaluate_columns(
-				const arma::dmat& x,
-				const arma::dvec& y
-		) override;
-};
-
-class LMGRelimpAlgorithm : public RelimpAlgorithm {
-	private:
-		bool intercept;
-		std::vector<std::string> headers;
-	public:
-		LMGRelimpAlgorithm(
-				bool intercept,
-				std::vector<std::string> headers
-		);
-
-		/**
-		* @brief Calculates rsq of a single predictor.
-		* @param x The independent variables of the regression.
-		* @param y The dependent variable of the regression.
-		* @param i The index of the col to evaluate.
-		* @return The r-squared.
-		*/
-		double evaluate_column(
-				const arma::dmat& x,
-				const arma::dvec& y,
-				const arma::uword i
 		);
 
 		arma::dvec evaluate_columns(

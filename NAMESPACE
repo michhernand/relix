@@ -1,3 +1,4 @@
 exportPattern("^[[:alpha:]]+")
-useDynLib(relix)
+useDynLib(relix, .registration = TRUE)
 importFrom(Rcpp, evalCpp)
+import(RcppArmadillo)

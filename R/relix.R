@@ -1,17 +1,25 @@
-relix <- function(fit, type, intercept = FALSE) {
-	# independent variables
-	model_matrix <- model.matrix(fit)
-	if (intercept == FALSE) {
-		model_matrix <- model_matrix[, -which(colnames(model_matrix) == "(Intercept)")]
-	}
+#' Calculates Relative Importance of Linear Model Terms
+#'
+#' @title Calculate Relative Importance
+#' @description Calculates relative importance of terms in linear model.
+#' @param fit A linear model produced by lm().
+#' @param type A string indicating which importance algorithm should be used.
+#' @return A dataframe showing the relative importance of each column.
+#' @examples
+#' \dontrun{
+#' fit <- lm(mpg ~ hp + drat, data = mtcars)
+#' importances <- relix(fit, "last")
+#' }
+#' @export
+relix <- function(fit, type) {
+  model_matrix <- stats::model.matrix(fit)
 
-	# dependent variable
-	model_frame <- model.frame(fit)
-	model_response <- model.response(model_frame)
+  model_frame <- stats::model.frame(fit)
+  model_response <- stats::model.response(model_frame)
 
-	result <- relix::relix_r(model_matrix, model_response, type, intercept)
+  result <- relix_r(model_matrix, model_response, type, TRUE)
 
-	df <- data.frame(colnames(model_matrix), result)
-	colnames(df) <- c("column", "importance")
-	return(df)
+  df <- data.frame(colnames(model_matrix), result)
+  colnames(df) <- c("column", "importance")
+  return(df)
 }

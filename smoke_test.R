@@ -1,4 +1,3 @@
-#!/bin/bash
 fit <- lm("mpg ~ cyl + disp + hp + drat", data = mtcars)
 
 relix_func <- function() {

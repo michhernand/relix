@@ -1,14 +1,16 @@
+#include <RcppArmadillo.h>
+// [[Rcpp::depends(RcppArmadillo)]]
+
+using namespace Rcpp;
+using namespace arma;
+
 #if defined(__LP64__) || defined(_WIN64) || defined(__x64_64__)
 #define ARMA_64BIT_WORD
 #endif
 
 #include <string>
 #include <vector>
-#include <RcppArmadillo.h>
-// [[Rcpp::depends(RcppArmadillo)]]
-
 #include "algos.h"
-#include "relix.h"
 
 // [[Rcpp::export]]
 Rcpp::NumericVector relix_r(
@@ -19,26 +21,23 @@ Rcpp::NumericVector relix_r(
 ) {
 	arma::dmat x_arma = Rcpp::as<arma::dmat>(x);
 	arma::dvec y_arma = Rcpp::as<arma::dvec>(y);
+	std::vector<std::string> headers;
 
 	std::unique_ptr<RelimpAlgorithm> ra; 
 
 	if (type == "last") {
-		ra = std::make_unique<LastRelimpAlgorithm>(intercept, std::vector<std::string>{});
+		ra = std::make_unique<LastRelimpAlgorithm>(intercept, headers);
 	} else if (type == "first") {
-		ra = std::make_unique<FirstRelimpAlgorithm>(intercept, std::vector<std::string>{});
-	} else if (type == "lmg") {
-		ra = std::make_unique<LMGRelimpAlgorithm>(intercept, std::vector<std::string>{});
+		ra = std::make_unique<FirstRelimpAlgorithm>(intercept, headers);
 	} else {
 		Rcpp::Rcerr << "invlaid type argument";
 		return Rcpp::NumericVector();
 	}
 
 	try {
-		return Rcpp::wrap(relative_importance(x_arma, y_arma, *ra));
-	} catch(const std::out_of_range& oor) {
-		Rcpp::Rcerr << oor.what();
+		return Rcpp::wrap(ra->evaluate_columns(x_arma, y_arma));
 	} catch(const std::invalid_argument& ia) {
-		Rcpp::Rcerr << ia.what();
+		Rcpp::stop(ia.what());
 	}
 	return Rcpp::NumericVector();
 }
