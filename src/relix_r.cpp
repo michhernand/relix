@@ -30,7 +30,7 @@ Rcpp::NumericVector relix_r(
 	} else if (type == "first") {
 		ra = std::make_unique<FirstRelimpAlgorithm>(intercept, headers);
 	} else {
-		Rcpp::Rcerr << "invlaid type argument";
+		Rcpp::warning("invlaid type argument");
 		return Rcpp::NumericVector();
 	}
 
@@ -38,6 +38,10 @@ Rcpp::NumericVector relix_r(
 		return Rcpp::wrap(ra->evaluate_columns(x_arma, y_arma));
 	} catch(const std::invalid_argument& ia) {
 		Rcpp::stop(ia.what());
+	} catch(const std::runtime_error& e) {
+		Rcpp::stop("Error in linear model calculation: %s", e.what());
+	} catch(const std::exception& e) {
+		Rcpp::stop("Unexpected error: %s", e.what());
 	}
 	return Rcpp::NumericVector();
 }
