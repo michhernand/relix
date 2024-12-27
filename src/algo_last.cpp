@@ -4,6 +4,7 @@
 #include <vector>
 #include "lm.h"
 #include "algos.h"
+#include "utils.h"
 
 LastRelimpAlgorithm::LastRelimpAlgorithm(
 		bool intercept,

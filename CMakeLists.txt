@@ -30,7 +30,6 @@ if(USE_R_LIBS)
 		src/utils.cpp
 		src/algo_first.cpp
 		src/algo_last.cpp
-		src/relix.cpp
 		src/relix_r.cpp
 	)
 else()
@@ -39,7 +38,6 @@ else()
 		src/utils.cpp
 		src/algo_first.cpp
 		src/algo_last.cpp
-		src/relix.cpp
 	)
 endif()
 

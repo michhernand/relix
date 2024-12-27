@@ -7,18 +7,6 @@
 
 const std::string IA_MSG = "x has no columns";
 
-arma::uvec select_except(const arma::dmat& x, arma::uword skip_col);
-
-std::vector<std::string> get_headers(
-		const arma::uvec ixs,
-		const std::vector<std::string> headers
-);
-
-std::string get_headers_string(
-		const arma::uvec ixs,
-		const std::vector<std::string> headers
-);
-
 /**
 * @brief Relative Importance algorithm to rank importance of linear model results.
 */
