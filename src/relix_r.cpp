@@ -16,22 +16,20 @@ using namespace arma;
 Rcpp::NumericVector relix_r(
 		Rcpp::NumericMatrix x,
 		Rcpp::NumericVector y,
-		std::string type,
-		bool intercept
+		std::string type
 ) {
-	arma::dmat x_arma = Rcpp::as<arma::dmat>(x);
-	arma::dvec y_arma = Rcpp::as<arma::dvec>(y);
+	arma::dmat x_arma { Rcpp::as<arma::dmat>(x) };
+	arma::dvec y_arma { Rcpp::as<arma::dvec>(y) };
 	std::vector<std::string> headers;
 
 	std::unique_ptr<RelimpAlgorithm> ra; 
 
 	if (type == "last") {
-		ra = std::make_unique<LastRelimpAlgorithm>(intercept, headers);
+		ra = std::make_unique<LastRelimpAlgorithm>(true, headers);
 	} else if (type == "first") {
-		ra = std::make_unique<FirstRelimpAlgorithm>(intercept, headers);
+		ra = std::make_unique<FirstRelimpAlgorithm>(true, headers);
 	} else {
-		Rcpp::warning("invlaid type argument");
-		return Rcpp::NumericVector();
+		Rcpp::stop("invlaid type argument");
 	}
 
 	try {
