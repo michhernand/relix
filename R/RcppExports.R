@@ -2,6 +2,6 @@
 # Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 relix_r <- function(x, y, type) {
-    .Call(`_relix_relix_r`, x, y, type)
+    .Call('_relix_relix_r', PACKAGE = 'relix', x, y, type)
 }
 
