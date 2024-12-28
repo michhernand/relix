@@ -1,17 +1,17 @@
 Package: relix
 Type: Package
-Title: What the Package Does in One 'Title Case' Line
+Title: Measures Relative Importance of Terms of a Linear Model
 Version: 0.1.0
 Date: 2024-12-19
-Author: Your Name
-Maintainer: Your Name <your@email.com>
-Description: One paragraph description of what the package does as one
-        or more full sentences.
+Author: Michael Hernandez
+Maintainer: Michael Hernandez <michael@hernandez.ai>
+Description: Measures relative importance of terms of a linear model. Methodology developed by Ulrike Groemping (Groemping, U. (2006). Relative Importance for Linear Regression in R: The Package relaimpo. Journal of Statistical Software, 17(1), 1–27. <doi:10.18637/jss.v017.i01>).
 License: GPL (>= 2)
+Encoding: UTF-8
 Imports:
     Rcpp (>= 1.0.13),
     RcppArmadillo
 LinkingTo:
     Rcpp,
     RcppArmadillo
-
+RoxygenNote: 7.3.1

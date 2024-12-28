@@ -4,6 +4,28 @@
 #include <vector>
 
 /**
+* @brief Finds the index of a given column header.
+* @param name The header to look up.
+* @param headers All column headers.
+* @return The index of the found header.
+*/
+arma::uword lookup_index(
+		std::string name, 
+		arma::field<std::string> headers
+) {
+	for (arma::uword i = 0; i < headers.size(); ++i) {
+		std::string header = headers.at(i);
+		if (header.front() == '"' && header.back() == '"') {
+			header = header.substr(1, header.length() - 2);
+		}
+		if (header == name) {
+			return i;
+		}
+	}
+	return -1;
+}
+
+/**
 * @brief Selects all column indexes of x except for i.
 * @param x The matrix to select column indexes from.
 * @param skip_col The column index to omit.

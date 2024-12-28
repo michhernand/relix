@@ -11,6 +11,6 @@ relaimpo_func <- function() {
 results <- microbenchmark::microbenchmark(
 	relix_func(),
 	relaimpo_func(),
-	times = 2000L
+	times = 20L
 )
 print(results)
