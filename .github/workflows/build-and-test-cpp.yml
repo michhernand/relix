@@ -20,6 +20,6 @@ jobs:
     - name: build
       run: |
         pwd
-        cmake --build .
+        cd ./build && cmake --build .
     - name: test
       run: ./tests/relix_test
