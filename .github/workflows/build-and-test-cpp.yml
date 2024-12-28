@@ -10,9 +10,9 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: pre-reqs
-      run: apt install cmake libopenblas-dev liblapack-dev libarpack2-dev libsuperlu-dev
+      run: sudo apt install cmake libopenblas-dev liblapack-dev libarpack2-dev libsuperlu-dev
     - name: install arma
-      run: apt install armadillo
+      run: sudo apt install armadillo
     - name: configure
       run: mkdir ./build && cd ./build && cmake .. -DUSE_R_LIBS=OFF
     - name: build
