@@ -14,3 +14,4 @@ results <- microbenchmark::microbenchmark(
 	times = 20L
 )
 print(results)
+
