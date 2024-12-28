@@ -10,12 +10,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: pre-reqs
-      run: apt install \
-      cmake \
-      libopenblas-dev \
-      liblapack-dev \
-      libarpack2-dev \
-      libsuperlu-dev
+      run: apt install cmake libopenblas-dev liblapack-dev libarpack2-dev libsuperlu-dev
     - name: install arma
       run: apt install armadillo
     - name: configure
