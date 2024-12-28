@@ -28,7 +28,6 @@ jobs:
       run: mkdir ./build && cd ./build && cmake .. -DUSE_R_LIBS=OFF
     - name: build
       run: |
-        pwd
         cd ./build && cmake --build .
     - name: test
-      run: ./tests/relix_test
+      run: ./build/tests/relix_test
