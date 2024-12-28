@@ -11,8 +11,15 @@ jobs:
     - uses: actions/checkout@v4
     - name: install cmake
       run: sudo apt install -y cmake
-    - name: pre-reqs
-      run: sudo apt install -y libopenblas-dev liblapack-dev libarpack2-dev libsuperlu-dev
+    - name: install la libs
+      run: |
+        sudo apt install -y 
+        libopenblas-dev 
+        liblapack-dev
+        libarpack2-dev
+        libsuperlu-dev
+    - name: install boost
+      run: sudo apt install -y libboost-all-dev
     - name: install arma
       run: sudo apt install -y libarmadillo-dev
     - name: configure
