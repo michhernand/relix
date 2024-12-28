@@ -74,33 +74,4 @@ class FirstRelimpAlgorithm : public RelimpAlgorithm {
 		) override;
 };
 
-class LMGRelimpAlgorithm : public RelimpAlgorithm {
-	private:
-		bool intercept;
-		std::vector<std::string> headers;
-	public:
-		LMGRelimpAlgorithm(
-				bool intercept,
-				std::vector<std::string> headers
-		);
-
-		/**
-		* @brief Calculates rsq of a single predictor.
-		* @param x The independent variables of the regression.
-		* @param y The dependent variable of the regression.
-		* @param i The index of the col to evaluate.
-		* @return The r-squared.
-		*/
-		double evaluate_column(
-				const arma::dmat& x,
-				const arma::dvec& y,
-				const arma::uword i
-		);
-
-		arma::dvec evaluate_columns(
-				const arma::dmat& x,
-				const arma::dvec& y
-		) override;
-};
-
 #endif

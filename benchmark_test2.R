@@ -3,11 +3,11 @@ print(colnames(df))
 fit <- lm("total_amount ~ trip_distance + fare_amount + extra + tip_amount", data = df)
 
 relix_func <- function() {
-	relix::relix(fit, "last", intercept = FALSE)
+	relix::relix(fit, "last")
 }
 
 relaimpo_func <- function() {
-	relaimpo::calc.relimp(fit, "last", intercept = FALSE)
+	relaimpo::calc.relimp(fit, "last")
 }
 
 results <- microbenchmark::microbenchmark(

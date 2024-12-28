@@ -1,0 +1,16 @@
+^CMakeCache\.txt$
+^CMakeFiles/
+^CMakeLists\.txt$
+^Makefile$
+^_deps/
+^benchmark_test\.R$
+^benchmark_test2\.R$
+^clean\.sh$
+^cmake_install\.cmake$
+^compile_commands\.json$
+^create_compile_commands\.sh$
+^rcpp_includes\.R$
+^rebuild_R\.sh$
+^smoke_test\.R$
+^uninstall_R\.sh$
+^tests/

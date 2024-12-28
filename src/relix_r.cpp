@@ -8,14 +8,12 @@
 // [[Rcpp::depends(RcppArmadillo)]]
 
 #include "algos.h"
-#include "relix.h"
 
 // [[Rcpp::export]]
 Rcpp::NumericVector relix_r(
 		Rcpp::NumericMatrix x,
 		Rcpp::NumericVector y,
-		std::string type,
-		bool intercept
+		std::string type
 ) {
 	arma::dmat x_arma = Rcpp::as<arma::dmat>(x);
 	arma::dvec y_arma = Rcpp::as<arma::dvec>(y);
@@ -23,22 +21,20 @@ Rcpp::NumericVector relix_r(
 	std::unique_ptr<RelimpAlgorithm> ra; 
 
 	if (type == "last") {
-		ra = std::make_unique<LastRelimpAlgorithm>(intercept, std::vector<std::string>{});
+		ra = std::make_unique<LastRelimpAlgorithm>(true, std::vector<std::string>{});
 	} else if (type == "first") {
-		ra = std::make_unique<FirstRelimpAlgorithm>(intercept, std::vector<std::string>{});
-	} else if (type == "lmg") {
-		ra = std::make_unique<LMGRelimpAlgorithm>(intercept, std::vector<std::string>{});
+		ra = std::make_unique<FirstRelimpAlgorithm>(true, std::vector<std::string>{});
 	} else {
-		Rcpp::Rcerr << "invlaid type argument";
+		Rcpp::stop("invlaid type argument");
 		return Rcpp::NumericVector();
 	}
 
 	try {
-		return Rcpp::wrap(relative_importance(x_arma, y_arma, *ra));
+		return Rcpp::wrap(ra->evaluate_columns(x_arma, y_arma));
 	} catch(const std::out_of_range& oor) {
-		Rcpp::Rcerr << oor.what();
+		Rcpp::stop(oor.what());
 	} catch(const std::invalid_argument& ia) {
-		Rcpp::Rcerr << ia.what();
+		Rcpp::stop(ia.what());
 	}
 	return Rcpp::NumericVector();
 }

@@ -3,11 +3,9 @@ CXX_STD = CXX23
 PKG_CPPFLAGS = -I../inst/include
 PKG_CXX_SOURCES = \
     lm.cpp \
-    relix.cpp \
     relix_r.cpp \
     utils.cpp \
     algos_last.cpp \
-    algos_lmg.cpp \
     algos_first.cpp
 
 CPPFLAGS += -I/Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/library/Rcpp/include
