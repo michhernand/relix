@@ -1,6 +1,6 @@
 name: C/C++ CI
 
-on: push
+on: pull_request
 
 jobs:
   build:
@@ -9,9 +9,25 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
+    - name: update
+      run: sudo apt-get update -y
+    - name: install cmake
+      run: sudo apt-get install -y cmake
+    - name: install la libs
+      run: |
+        sudo apt-get install -y \
+        libopenblas-dev \
+        liblapack-dev \
+        libarpack2-dev \
+        libsuperlu-dev
+    - name: install boost
+      run: sudo apt-get install -y libboost-all-dev
+    - name: install arma
+      run: sudo apt-get install -y libarmadillo-dev
     - name: configure
       run: mkdir ./build && cd ./build && cmake .. -DUSE_R_LIBS=OFF
     - name: build
-      run: cmake --build .
+      run: |
+        cd ./build && cmake --build .
     - name: test
-      run: ./tests/relix_test
+      run: cd ./build && ./tests/relix_test

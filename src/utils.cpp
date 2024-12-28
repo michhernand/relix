@@ -3,8 +3,6 @@
 #include <string>
 #include <vector>
 
-
-
 /**
 * @brief Finds the index of a given column header.
 * @param name The header to look up.

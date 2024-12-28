@@ -1,7 +1,7 @@
 fit <- lm("mpg ~ disp + hp + drat", data = mtcars)
 
 relix_func <- function() {
-	relix::relix_(fit, "first")
+	relix::relix(fit, "first")
 }
 
 relaimpo_func <- function() {

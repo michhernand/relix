@@ -1,4 +1,12 @@
-CXX_STD = CXX17
+CXXFLAGS += -std=c++23
+CXX_STD = CXX23
+PKG_CPPFLAGS = -I../inst/include
+PKG_CXX_SOURCES = \
+    lm.cpp \
+    relix_r.cpp \
+    utils.cpp \
+    algos_last.cpp \
+    algos_first.cpp
 
 PKG_CPPFLAGS = -I../inst/include -I"$(R_HOME)/library/RcppArmadillo/include"
 PKG_LIBS = $(LAPACK_LIBS) $(BLAS_LIBS) $(FLIBS)

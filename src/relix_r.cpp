@@ -8,7 +8,6 @@
 #include <string>
 #include <vector>
 #include "algos.h"
-#include <iostream>
 
 // [[Rcpp::export]]
 Rcpp::NumericVector relix_r(
@@ -26,21 +25,21 @@ Rcpp::NumericVector relix_r(
 	std::unique_ptr<RelimpAlgorithm> ra; 
 
 	if (type == "last") {
-		ra = std::make_unique<LastRelimpAlgorithm>(intercept, headers);
+		ra = std::make_unique<LastRelimpAlgorithm>(true, std::vector<std::string>{});
 	} else if (type == "first") {
-		ra = std::make_unique<FirstRelimpAlgorithm>(intercept, headers);
+		ra = std::make_unique<FirstRelimpAlgorithm>(true, std::vector<std::string>{});
 	} else {
 		Rcpp::stop("invlaid type argument");
+		return Rcpp::NumericVector();
+
 	}
 
 	try {
 		return Rcpp::wrap(ra->evaluate_columns(x_arma, y_arma));
+	} catch(const std::out_of_range& oor) {
+		Rcpp::stop(oor.what());
 	} catch(const std::invalid_argument& ia) {
 		Rcpp::stop(ia.what());
-	} catch(const std::runtime_error& e) {
-		Rcpp::stop("Error in linear model calculation: %s", e.what());
-	} catch(const std::exception& e) {
-		Rcpp::stop("Unexpected error: %s", e.what());
 	}
 	return Rcpp::NumericVector();
 }
