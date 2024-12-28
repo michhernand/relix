@@ -13,10 +13,10 @@ jobs:
       run: sudo apt install -y cmake
     - name: install la libs
       run: |
-        sudo apt install -y 
-        libopenblas-dev 
-        liblapack-dev
-        libarpack2-dev
+        sudo apt install -y \
+        libopenblas-dev \
+        liblapack-dev \
+        libarpack2-dev \
         libsuperlu-dev
     - name: install boost
       run: sudo apt install -y libboost-all-dev
