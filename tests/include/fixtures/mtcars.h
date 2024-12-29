@@ -2,7 +2,7 @@
 #include <stdexcept>
 #include "lm.h"
 
-const std::string DEFAULT_PATH = "../tests/data/mtcars.csv";
+const std::string DEFAULT_PATH = TEST_DATA_DIR "/mtcars.csv";
 
 const std::string DEFAULT_Y_LAB = "mpg";
 const std::vector<std::string> DEFAULT_X_LABS = {
