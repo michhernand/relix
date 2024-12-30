@@ -57,3 +57,7 @@ build/
 DartConfiguration.tcl
 relix.Rcheck/
 **/*.tar.gz
+CMakeUserPresets.json
+tests/Makefile
+tests/relix_test
+tests/*.cmake
