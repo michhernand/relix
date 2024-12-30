@@ -12,6 +12,7 @@ This software is built using the methodology and principles of Relative Importan
 #### Requirements
 - [cmake](https://cmake.org)
 - [vcpkg](https://vcpkg.io/)
+- C++ Compiler
 
 #### Steps
 - `mkdir build`
@@ -28,7 +29,7 @@ This software is built using the methodology and principles of Relative Importan
 - [cmake](https://cmake.org)
 - C++ Compiler
 #### Steps
-- cmake -DR_BUILD=ON -P ./builder.cmake
+- `cmake -DR_BUILD=ON -P ./builder.cmake`
 ### Option 3: Manual Compilation
 #### Requirements
 - [R](https://cran.r-project.org)
