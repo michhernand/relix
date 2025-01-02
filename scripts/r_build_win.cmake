@@ -1,7 +1,7 @@
 function(compile_attributes)
 	message(STATUS "Recompiling Attributes")
 	execute_process(
-		COMMAND Rscript -e "Rcpp::compileAttributes()"
+		COMMAND Rscript.exe -e "Rcpp::compileAttributes()"
 		WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
 		RESULT_VARIABLE rcmd_compile_result
 		OUTPUT_VARIABLE rcmd_compile_output
@@ -20,7 +20,7 @@ endfunction()
 function(compile_documentation)
 	message(STATUS "Recompiling Docs")
 	execute_process(
-		COMMAND Rscript -e "devtools::document()"
+		COMMAND Rscript.exe -e "devtools::document()"
 		WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
 		RESULT_VARIABLE rcmd_doc_result
 		OUTPUT_VARIABLE rcmd_doc_output
@@ -39,7 +39,7 @@ endfunction()
 function(build_r_lib)
 	message(STATUS "Building R Library")
 	execute_process(
-		COMMAND R CMD BUILD .
+		COMMAND R.exe CMD BUILD .
 		WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
 		RESULT_VARIABLE rcmd_build_result
 		OUTPUT_VARIABLE rcmd_build_output
@@ -69,7 +69,7 @@ endfunction()
 function(install_r_lib)
 	message(STATUS "Installing ${rcmd_package}")
 	execute_process(
-		COMMAND R CMD INSTALL --clean --preclean ${rcmd_package}
+		COMMAND R.exe CMD INSTALL --clean --preclean ${rcmd_package}
 		WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
 		RESULT_VARIABLE rcmd_install_result
 		OUTPUT_VARIABLE rcmd_install_output

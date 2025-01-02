@@ -63,15 +63,27 @@ IF (${TEST})
 ENDIF()
 
 IF (${R_TEST})
-	execute_process(
-		COMMAND Rscript -e "devtools::test()"
-		WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
-		RESULT_VARIABLE rtest_result
-		OUTPUT_VARIABLE rtest_output
-		ERROR_VARIABLE rtest_error
-		OUTPUT_STRIP_TRAILING_WHITESPACE
-		ERROR_STRIP_TRAILING_WHITESPACE
-	)
+	IF (WIN32)
+		execute_process(
+			COMMAND Rscript.exe -e "devtools::test()"
+			WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+			RESULT_VARIABLE rtest_result
+			OUTPUT_VARIABLE rtest_output
+			ERROR_VARIABLE rtest_error
+			OUTPUT_STRIP_TRAILING_WHITESPACE
+			ERROR_STRIP_TRAILING_WHITESPACE
+		)
+	ELSEIF(UNIX)
+		execute_process(
+			COMMAND Rscript -e "devtools::test()"
+			WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+			RESULT_VARIABLE rtest_result
+			OUTPUT_VARIABLE rtest_output
+			ERROR_VARIABLE rtest_error
+			OUTPUT_STRIP_TRAILING_WHITESPACE
+			ERROR_STRIP_TRAILING_WHITESPACE
+		)
+	ENDIF()
 	message(STATUS ${rtest_result})
 	message(STATUS ${rtest_output})
 	message(STATUS ${rtest_error})
