@@ -13,4 +13,5 @@
 ^rebuild_R\.sh$
 ^smoke_test\.R$
 ^uninstall_R\.sh$
-^tests/
+^tests/cpp/
+^build/
