@@ -40,22 +40,28 @@ Note: Unit tests showing accuracy can be found in tests/cpp/src.
                     <li>C++ Compiler</li>
                 </ul>
             <h4>Steps</h4>
-- `mkdir build`
-- `cmake -DUSE_R_LIBS=OFF --preset=default`
-- `cmake --build ./build`
+                <pre><code>
+                    mkdir build
+                    cmake -DUSE_R_LIBS=OFF --preset=default
+                    cmake --build ./build
+                </code></pre>
 </details>
 
 <details>
     <summary>R Library</summary>
-## Installation
-### Option 1: Pre-Compiled Distributions
-- TBD
-### Option 2: CMake Script
-#### Requirements
-- [R](https://cran.r-project.org)
-- [cmake](https://cmake.org)
-- C++ Compiler
-#### Steps
+    <h2>Installation</h2>
+        <h3>Option 1: Pre-Compiled Distributions</h3>
+            <ul>
+                <li>TBD</li>
+            </ul>
+        <h3>Option 2: CMake Script</h3>
+            <h4>Requirements</h4>
+                <ul>
+                    <li>[R](https://cran.r-project.org)</li>
+                    <li>[cmake](https://cmake.org)</li>
+                    <li>C++ Compiler</li>
+                </ul>
+            <h4>Steps</h4>
 - `cmake -DR_BUILD=ON -P ./builder.cmake`
 ### Option 3: Manual Compilation
 #### Requirements
