@@ -10,7 +10,7 @@ SET(RCMD_CHECK_DIR "relix.Rcheck" CACHE STRING "R CMD check directory")
 
 SET(
 	CACHE_FILES
-	"CMakeCache.txt;cmake_install.cmake;compile_commands.json;CMakeFiles;*.o;*.so;*.a;*.log;relix_*.tar.gz"
+	"CMakeCache.txt;cmake_install.cmake;compile_commands.json;CMakeFiles;*.o;*.so;*.a;*.log;relix_*.tar.gz;tests/relix_test"
 	CACHE INTERNAL
 	"build cache files"
 )
