@@ -15,7 +15,9 @@ Relix was created to:
 - Make relative importance cross-language (R, Python, C++).
 
 # Performance
-Two benchmarks (in R) can be found in Rscripts/. Each benchmark was invoked from the command line using `Rscript ./Rscripts/benchmark1.R` and `Rscript ./Rscripts/benchmark2.R`. Overall, we can see roughly a 
+Benchmarks were invoked from the command line using `Rscript ./Rscripts/benchmark1.R` and `Rscript ./Rscripts/benchmark2.R`. Overall, we can see a significant speed increase.
+
+Note: Unit tests showing accuracy can be found in tests/cpp/src.
 
 ## Benchmark 1 (MTCars - Relix is 8.53x Faster)
 ![Benchmark 1](./images/benchmark1_result.png)
