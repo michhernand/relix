@@ -64,7 +64,7 @@ Two benchmarks (in R) can be found in Rscripts/. Each benchmark was invoked from
 - To uninstall, run `Rscript -e "remove.packages('relix')"`
 
 # Roadmap
-[X] "First" algorithm.
-[X] "Last" algorithm.
-[ ] (In Progress) v0.1 release.
-[ ] "LMG" algorithm.
+- [X] "First" algorithm.
+- [X] "Last" algorithm.
+- [ ] (In Progress) v0.1 release.
+- [ ] "LMG" algorithm.
