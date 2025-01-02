@@ -28,17 +28,18 @@ Note: Unit tests showing accuracy can be found in tests/cpp/src.
 <details>
     <summary>C++ Library</summary>
     <h2>Installation</h2>
-    <h3>Pre-Compiled Distributions</h3>
-    <ul>
-        <li>TBD</li>
-    </ul>
-### Build From Source
-#### Requirements
-- [cmake](https://cmake.org)
-- [vcpkg](https://vcpkg.io/)
-- C++ Compiler
-
-#### Steps
+        <h3>Pre-Compiled Distributions</h3>
+        <ul>
+            <li>TBD</li>
+        </ul>
+        <h3>Build From Source</h3>
+            <h4>Requirements</h4>
+                <ul>
+                    <li>[cmake](https://cmake.org)</li>
+                    <li>[vcpkg](https://vcpkg.io/)</li>
+                    <li>C++ Compiler</li>
+                </ul>
+            <h4>Steps</h4>
 - `mkdir build`
 - `cmake -DUSE_R_LIBS=OFF --preset=default`
 - `cmake --build ./build`
