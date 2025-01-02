@@ -48,6 +48,31 @@ IF(${R_BUILD})
 	ENDIF()
 ENDIF()
 
-# IF (${TEST})
-# 	ctest --test-dir ./build --output-on-failure
-# ENDIF()
+IF (${TEST})
+	execute_process(
+		COMMAND ctest --test-dir ./build --output-on-failure
+		RESULT_VARIABLE test_result
+		OUTPUT_VARIABLE test_output
+		ERROR_VARIABLE test_error
+		OUTPUT_STRIP_TRAILING_WHITESPACE
+		ERROR_STRIP_TRAILING_WHITESPACE
+	)
+	message(STATUS ${test_result})
+	message(STATUS ${test_output})
+	message(STATUS ${test_error})
+ENDIF()
+
+IF (${R_TEST})
+	execute_process(
+		COMMAND Rscript -e "devtools::test()"
+		WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+		RESULT_VARIABLE rtest_result
+		OUTPUT_VARIABLE rtest_output
+		ERROR_VARIABLE rtest_error
+		OUTPUT_STRIP_TRAILING_WHITESPACE
+		ERROR_STRIP_TRAILING_WHITESPACE
+	)
+	message(STATUS ${rtest_result})
+	message(STATUS ${rtest_output})
+	message(STATUS ${rtest_error})
+ENDIF()
