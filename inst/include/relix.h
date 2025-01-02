@@ -1,3 +1,14 @@
+// This file includes/modifies Armadillo code
+// Copyright 2008-2024 Conrad Sanderson (https://conradsanderson.id.au)
+// Copyright 2008-2016 National ICT Australia (NICTA)
+// Copyright 2017-2024 Data61 / CSIRO
+// Licensed under Apache License 2.0 (see LICENSE_Armadillo.txt)
+//
+// This file uses Boost library code
+// Copyright Beman Dawes, David Abrahams, 1998-2005.
+// Copyright Rene Rivera 2004-2007.
+// Licensed under Boost Software License 1.0 (see LICENSE_Boost.txt)
+
 #ifndef RELIX_H
 #define RELIX_H
 
