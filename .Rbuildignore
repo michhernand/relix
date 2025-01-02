@@ -14,4 +14,9 @@
 ^smoke_test\.R$
 ^uninstall_R\.sh$
 ^tests/cpp/
+^tests/CMakeFiles/
+^tests/relix_test
+^tests/Makefile
+^tests/*.cmake
 ^build/
+^.github/
