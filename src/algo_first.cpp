@@ -1,5 +1,4 @@
 #include <armadillo>
-#include <stdexcept>
 #include <string>
 #include <vector>
 #include "lm.h"
@@ -20,10 +19,6 @@ arma::dvec FirstRelimpAlgorithm::evaluate_columns(
 		const arma::dmat& x,
 		const arma::dvec& y
 ) {
-	if (x.n_cols == 0) {
-		throw std::invalid_argument(IA_MSG);
-	}
-
 	arma::dvec rsqs = arma::zeros(x.n_cols);
 	for (arma::uword i = 0; i < x.n_cols; ++i) {
 		if (this->intercept) {

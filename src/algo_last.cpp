@@ -1,5 +1,4 @@
 #include <armadillo>
-#include <stdexcept>
 #include <string>
 #include <vector>
 #include "lm.h"
@@ -22,10 +21,6 @@ arma::dvec LastRelimpAlgorithm::evaluate_columns(
 		const arma::dmat& x,
 		const arma::dvec& y
 ) {
-	if (x.n_cols == 0) {
-		throw std::invalid_argument(IA_MSG);
-	}
-
 	double baseline_rsq = basic_lm(x, y);
 
 	arma::dvec rsqs = arma::zeros(x.n_cols);

@@ -1,3 +1,7 @@
+#define ARMA_WARN_LEVEL 1
+#define ARMA_DONT_USE_WRAPPER
+#define ARMA_DONT_PRINT_ERRORS
+
 #include <armadillo>
 #include "lm.h"
 
