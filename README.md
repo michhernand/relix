@@ -25,58 +25,8 @@ Note: Unit tests showing accuracy can be found in tests/cpp/src.
 ## Benchmark 2 (TLC Trip Record Data - Relix is 19.31x Faster)
 ![Benchmark 2](./images/benchmark2_result.png)
 
-<details>
-    <summary>C++ Library</summary>
-    <h2>Installation</h2>
-        <h3>Pre-Compiled Distributions</h3>
-        <ul>
-            <li>TBD</li>
-        </ul>
-        <h3>Build From Source</h3>
-            <h4>Requirements</h4>
-                <ul>
-                    <li>[cmake](https://cmake.org)</li>
-                    <li>[vcpkg](https://vcpkg.io/)</li>
-                    <li>C++ Compiler</li>
-                </ul>
-            <h4>Steps</h4>
-                <pre><code>
-                    mkdir build
-                    cmake -DUSE_R_LIBS=OFF --preset=default
-                    cmake --build ./build
-                </code></pre>
-</details>
-
-<details>
-    <summary>R Library</summary>
-    <h2>Installation</h2>
-        <h3>Option 1: Pre-Compiled Distributions</h3>
-            <ul>
-                <li>TBD</li>
-            </ul>
-        <h3>Option 2: CMake Script</h3>
-            <h4>Requirements</h4>
-                <ul>
-                    <li>[R](https://cran.r-project.org)</li>
-                    <li>[cmake](https://cmake.org)</li>
-                    <li>C++ Compiler</li>
-                </ul>
-            <h4>Steps</h4>
-- `cmake -DR_BUILD=ON -P ./builder.cmake`
-### Option 3: Manual Compilation
-#### Requirements
-- [R](https://cran.r-project.org)
-- C++ Compiler
-#### Steps
-##### Unix
-- `R CMD BUILD .`
-- `R CMD INSTALL relix_x.xx.tar.gz`
-##### Windows
-- `R.exe CMD build .`
-- `R.exe CMD INSTALL relix_x.xx.tar.gz`
-## Removal
-- To uninstall, run `Rscript -e "remove.packages('relix')"`
-</details>
+# Installation
+Please refer to the [project wiki](https://github.com/michhernand/relix/wiki) for the [C++ installation instructions](https://github.com/michhernand/relix/wiki/CPP-Installation) and [R installation instructions](https://github.com/michhernand/relix/wiki/R-Installation).
 
 # Roadmap
 - [X] "First" algorithm.
