@@ -20,7 +20,7 @@ Two benchmarks (in R) can be found in Rscripts/. Each benchmark was invoked from
 ## Benchmark 1 (MTCars - Relix is 8.53x Faster)
 ![Benchmark 1](./images/benchmark1_result.png)
 
-## Benchmark 2 (TLC Trip Record Data - Relix is 19.31 Faster)
+## Benchmark 2 (TLC Trip Record Data - Relix is 19.31x Faster)
 ![Benchmark 2](./images/benchmark2_result.png)
 
 # C++ Library
