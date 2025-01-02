@@ -43,7 +43,7 @@ endfunction()
 function(build_r_lib)
 	message(STATUS "Building R Library")
 	execute_process(
-		COMMAND "R.exe CMD BUILD ."
+		COMMAND R.exe "CMD" "BUILD" "."
 		WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
 		RESULT_VARIABLE rcmd_build_result
 		OUTPUT_VARIABLE rcmd_build_output
