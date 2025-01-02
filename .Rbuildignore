@@ -32,3 +32,4 @@
 ^vcpkg-configuration.json
 ^vcpkg.json
 ^\.github$
+^images/
