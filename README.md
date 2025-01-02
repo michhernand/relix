@@ -69,4 +69,6 @@ Note: Unit tests showing accuracy can be found in tests/cpp/src.
 - [X] "First" algorithm.
 - [X] "Last" algorithm.
 - [ ] (In Progress) v0.1 release.
+- [ ] R Library on CRAN.
+- [ ] Python Library on PyPI.
 - [ ] "LMG" algorithm.
