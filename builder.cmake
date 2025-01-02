@@ -29,7 +29,11 @@ IF(${CLEAN})
 ENDIF()
 
 IF(${R_BUILD})
-	INCLUDE(${CMAKE_SOURCE_DIR}/scripts/r_build.cmake)
+	IF (WIN32)
+		INCLUDE(${CMAKE_SOURCE_DIR}/scripts/r_build_win.cmake)
+	ELSEIF (UNIX)
+		INCLUDE(${CMAKE_SOURCE_DIR}/scripts/r_build.cmake)
+	ENDIF()
 
 	IF(${COMPILE_ATTRS})
 		compile_attributes()
