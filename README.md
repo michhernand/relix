@@ -8,10 +8,10 @@ This software is built using the methodology and principles of Relative Importan
 This project is licensed under the MIT License - see LICENSE.txt
 
 This project includes:
-- [Armadillo](https://arma.sourceforge.net). 
+- [Armadillo](https://arma.sourceforge.net)
   - The license can be found in `./LICENSE_Armadillo.txt`.
   - See `./NOTICE_Armadillo.txt`.
-- [Boost](https://www.boost.org). 
+- [Boost](https://www.boost.org)
   - This license can be found in `./LICENSE_Boost.txt`.
 
 # Overview
