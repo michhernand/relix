@@ -29,3 +29,4 @@ catch_discover_tests(relix_test
 	REPORTER CONSOLE
 	WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
 )
+

@@ -28,7 +28,7 @@ find_package(Armadillo REQUIRED)
 option(
 	USE_R_LIBS 
 	"enable Rcpp and RcppArmadillo include paths for development" 
-	ON
+	OFF
 )
 
 if(USE_R_LIBS)
@@ -69,4 +69,4 @@ target_link_libraries(relix_lib PUBLIC
 	${ARMADILLO_LIBRARIES}
 )
 
-add_subdirectory(tests)
+add_subdirectory(tests/cpp)
