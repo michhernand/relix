@@ -25,7 +25,8 @@ Note: Unit tests showing accuracy can be found in tests/cpp/src.
 ## Benchmark 2 (TLC Trip Record Data - Relix is 19.31x Faster)
 ![Benchmark 2](./images/benchmark2_result.png)
 
-# C++ Library
+<details open>
+    <summary>C++ Library</summary>
 ## Installation
 ### Pre-Compiled Distributions
 - TBD
@@ -39,8 +40,10 @@ Note: Unit tests showing accuracy can be found in tests/cpp/src.
 - `mkdir build`
 - `cmake -DUSE_R_LIBS=OFF --preset=default`
 - `cmake --build ./build`
+</details>
 
-# R Library
+<details open>
+    <summary>R Library</summary>
 ## Installation
 ### Option 1: Pre-Compiled Distributions
 - TBD
@@ -64,6 +67,7 @@ Note: Unit tests showing accuracy can be found in tests/cpp/src.
 - `R.exe CMD INSTALL relix_x.xx.tar.gz`
 ## Removal
 - To uninstall, run `Rscript -e "remove.packages('relix')"`
+</details>
 
 # Roadmap
 - [X] "First" algorithm.
