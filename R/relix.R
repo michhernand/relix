@@ -1,3 +1,6 @@
+#' @useDynLib relix, .registration = TRUE
+#' @importFrom Rcpp evalCpp
+#'
 #' @export
 relix <- function(fit, type) {
   # independent variables
