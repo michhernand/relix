@@ -44,28 +44,19 @@ if(USE_R_LIBS)
 	message(STATUS "Rcpp include paths: ${RCPP_INCLUDES}")
 
 	add_library(relix_lib
-		src/lm.cpp
-		src/utils.cpp
-		src/algo_first.cpp
-		src/algo_last.cpp
 		src/relix_r.cpp
 	)
 else()
-	add_library(relix_lib
-		src/lm.cpp
-		src/utils.cpp
-		src/algo_first.cpp
-		src/algo_last.cpp
-	)
+	add_library(relix_lib INTERFACE)
 endif()
 
 
 
-target_include_directories(relix_lib PUBLIC 
+target_include_directories(relix_lib INTERFACE
 	${CMAKE_SOURCE_DIR}/inst/include ${ARMADILLO_INCLUDE_DIRS}
 )
 
-target_link_libraries(relix_lib PUBLIC 
+target_link_libraries(relix_lib INTERFACE
 	${ARMADILLO_LIBRARIES}
 )
 

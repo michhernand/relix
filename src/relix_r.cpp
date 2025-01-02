@@ -5,7 +5,7 @@
 #include <string>
 #include <vector>
 #include <memory>
-#include "algos.h"
+#include "relix.h"
 
 // [[Rcpp::export]]
 Rcpp::NumericVector relix_r(

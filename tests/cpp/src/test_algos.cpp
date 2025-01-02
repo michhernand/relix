@@ -2,7 +2,7 @@
 #include <catch2/matchers/catch_matchers.hpp>
 #include <catch2/matchers/catch_matchers_floating_point.hpp>
 #include <armadillo>
-#include "algos.h"
+#include "relix.h"
 #include "fixtures/mtcars.h"
 
 TEST_CASE_METHOD(MTCars, "Test LastRelimpAlgorithm.evaluate_columns-1") {

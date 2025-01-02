@@ -1,6 +1,6 @@
 #include <armadillo>
 #include <stdexcept>
-#include "lm.h"
+#include "relix.h"
 
 const std::string DEFAULT_PATH = TEST_DATA_DIR "/mtcars.csv";
 
