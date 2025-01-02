@@ -20,3 +20,14 @@
 ^tests/*.cmake
 ^build/
 ^.github/
+^CMakePresets.json
+^CMakeUserPresets.json
+^LICENSE.txt
+^LICENSE_Armadillo.txt
+^LICENSE_Boost.txt
+^Rscripts
+^builder.cmake
+^log.out
+^scripts/
+^vcpkg-configuration.json
+^vcpkg.json
