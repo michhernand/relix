@@ -25,11 +25,13 @@ Note: Unit tests showing accuracy can be found in tests/cpp/src.
 ## Benchmark 2 (TLC Trip Record Data - Relix is 19.31x Faster)
 ![Benchmark 2](./images/benchmark2_result.png)
 
-<details open>
+<details>
     <summary>C++ Library</summary>
-## Installation
-### Pre-Compiled Distributions
-- TBD
+    <h2>Installation</h2>
+    <h3>Pre-Compiled Distributions</h3>
+    <ul>
+        <li>TBD</li>
+    </ul>
 ### Build From Source
 #### Requirements
 - [cmake](https://cmake.org)
@@ -42,7 +44,7 @@ Note: Unit tests showing accuracy can be found in tests/cpp/src.
 - `cmake --build ./build`
 </details>
 
-<details open>
+<details>
     <summary>R Library</summary>
 ## Installation
 ### Option 1: Pre-Compiled Distributions
