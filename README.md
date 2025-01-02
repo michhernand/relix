@@ -12,7 +12,7 @@ This project includes:
   - The license can be found in `./LICENSE_Armadillo.txt`.
   - See `./NOTICE_Armadillo.txt`.
 - [Boost](https://www.boost.org)
-  - This license can be found in `./LICENSE_Boost.txt`.
+  - The license can be found in `./LICENSE_Boost.txt`.
 
 # Overview
 The original "relaimpo" package created by Ulrike Groemping has been immensely impactful. The code and underlying research are a significant contribution to the statistical community.
