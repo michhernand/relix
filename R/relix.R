@@ -1,10 +1,18 @@
-#' @useDynLib relix, .registration = TRUE
-#' @importFrom Rcpp evalCpp
+#' Calculate Relative Importance of Linear Model Terms
+#'
+#' @param fit linear model from lm().
+#' @param type relative importance algorithm to use.
+#' @return dataframe showing relative importance per column.
+#' @examples
+#' \dontrun{
+#' fit <- lm(mpg ~ hp + disp, data = mtcars)
+#' relix::relix(fit, type = "last")
+#' }
 #'
 #' @export
 relix <- function(fit, type) {
   # independent variables
-  model_matrix <- model.matrix(fit)
+  model_matrix <- stats::model.matrix(fit)
 
   model_frame <- stats::model.frame(fit)
   model_response <- stats::model.response(model_frame)
