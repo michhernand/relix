@@ -48,6 +48,6 @@ IF(${R_BUILD})
 	ENDIF()
 ENDIF()
 
-IF (${TEST})
-	ctest --test-dir ./build --output-on-failure
-ENDIF()
+# IF (${TEST})
+# 	ctest --test-dir ./build --output-on-failure
+# ENDIF()

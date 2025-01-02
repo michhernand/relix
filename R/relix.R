@@ -1,11 +1,12 @@
+#' @export
 relix <- function(fit, type) {
-	# independent variables
-	model_matrix <- model.matrix(fit)
+  # independent variables
+  model_matrix <- model.matrix(fit)
 
   model_frame <- stats::model.frame(fit)
   model_response <- stats::model.response(model_frame)
 
-	result <- relix::relix_r(model_matrix, model_response, type)
+  result <- relix_r(model_matrix, model_response, type)
 
   df <- data.frame(colnames(model_matrix), result)
   colnames(df) <- c("column", "importance")

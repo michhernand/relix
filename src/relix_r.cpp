@@ -1,9 +1,7 @@
+#define ARMA_64BIT_WORD
 #include <RcppArmadillo.h>
 // [[Rcpp::depends(RcppArmadillo)]]
-
-#if defined(__LP64__) || defined(_WIN64) || defined(__x64_64__)
-#define ARMA_64BIT_WORD
-#endif
+// [[Rcpp::plugins(cpp20)]]
 
 #include <string>
 #include <vector>
@@ -19,8 +17,8 @@ Rcpp::NumericVector relix_r(
 	bool intercept { true };
 	arma::dmat x_arma = Rcpp::as<arma::dmat>(x);
 	arma::dvec y_arma = Rcpp::as<arma::dvec>(y);
-	std::cout << "X ARMA SIZE: " << x_arma.n_elem;
-	std::cout << "Y ARMA SIZE: " << y_arma.n_elem;
+	// std::cout << "X ARMA SIZE: " << x_arma.n_elem;
+	// std::cout << "Y ARMA SIZE: " << y_arma.n_elem;
 	std::vector<std::string> headers;
 
 	std::unique_ptr<RelimpAlgorithm> ra; 

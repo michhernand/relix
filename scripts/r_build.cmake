@@ -69,7 +69,7 @@ endfunction()
 function(install_r_lib)
 	message(STATUS "Installing ${rcmd_package}")
 	execute_process(
-		COMMAND R CMD INSTALL ${rcmd_package}
+		COMMAND R CMD INSTALL --clean --preclean ${rcmd_package}
 		WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
 		RESULT_VARIABLE rcmd_install_result
 		OUTPUT_VARIABLE rcmd_install_output

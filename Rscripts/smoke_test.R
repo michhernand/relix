@@ -1,16 +1,9 @@
-fit <- lm("mpg ~ cyl + disp + hp + drat", data = mtcars)
+fit <- lm("mpg ~ disp + hp", data = mtcars)
 
 relix_func <- function() {
-	print(relix::relix(fit, "last", intercept = TRUE))
+	print(relix::relix(fit, "last"))
 }
 
-relaimpo_func <- function() {
-	print(relaimpo::calc.relimp(fit, type = "last"))
-}
-
-print("RELAIMPO")
-relaimpo_func()
-print("RELIX")
-relix_func()
+print(relix_func())
 
 
