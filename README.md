@@ -2,7 +2,20 @@
 
 Relix is a library to compute the relative importance of predictors in a linear regression. 
 
+
+# Citations
+
+## Relative Importance
 This software is built using the methodology and principles of Relative Importance developed by Ulrike Groemping (Groemping, U. (2006). Relative Importance for Linear Regression in R: The Package relaimpo. Journal of Statistical Software, 17(1), 1–27. <doi:10.18637/jss.v017.i01>).
+
+## Armadillo
+Conrad Sanderson and Ryan Curtin.
+Armadillo: a template-based C++ library for linear algebra.
+Journal of Open Source Software, Vol. 1, No. 2, pp. 26, 2016.
+
+Conrad Sanderson and Ryan Curtin.
+Practical Sparse Matrices in C++ with Hybrid Storage and Template-Based Expression Optimisation.
+Mathematical and Computational Applications, Vol. 24, No. 3, 2019.
 
 # License
 This project is licensed under the MIT License - see LICENSE.txt
