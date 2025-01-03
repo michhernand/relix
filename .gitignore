@@ -65,3 +65,4 @@ Makefile
 tests/cpp/*.cmake
 test/cpp/Makefile
 .DS_Store
+cmake_cmd.sh
