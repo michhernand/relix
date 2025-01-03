@@ -2,6 +2,22 @@ cmake_minimum_required(VERSION 3.11)
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+include(FetchContent)
+FetchContent_Declare(
+    Catch2
+    GIT_REPOSITORY https://github.com/catchorg/Catch2.git
+    GIT_TAG v3.4.0
+)
+FetchContent_MakeAvailable(Catch2)
+
+enable_testing()
+include(CTest)
+FetchContent_Declare(
+	Catch2
+	GIT_REPOSITORY https://github.com/catchorg/Catch2.git
+	GIT_TAG v3.4.0
+)
+FetchContent_MakeAvailable(Catch2)
 
 list(APPEND CMAKE_MODULE_PATH ${catch2_SOURCE_DIR}/extras)
 include(Catch)
