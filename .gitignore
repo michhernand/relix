@@ -61,3 +61,7 @@ CMakeUserPresets.json
 tests/Makefile
 tests/relix_test
 tests/*.cmake
+Makefile
+tests/cpp/*.cmake
+test/cpp/Makefile
+.DS_Store
