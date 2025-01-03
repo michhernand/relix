@@ -49,7 +49,7 @@ Note: Unit tests showing accuracy can be found in tests/cpp/src.
 ![Benchmark 2](./images/benchmark2_result.png)
 
 # Installation
-Please refer to the [project wiki](https://github.com/michhernand/relix/wiki) for the [C++ installation instructions](https://github.com/michhernand/relix/wiki/CPP-Installation) and [R installation instructions](https://github.com/michhernand/relix/wiki/R-Installation).
+Please refer to the [project wiki](https://github.com/michhernand/relix/wiki) for the [C++ installation instructions](https://github.com/michhernand/relix/wiki/CPP-Installation), [R installation instructions](https://github.com/michhernand/relix/wiki/R-Installation) and [Python installation instructions](https://github.com/michhernand/relix/wiki/Python-Installation).
 
 # Roadmap
 - [X] "First" algorithm.
