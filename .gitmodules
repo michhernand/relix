@@ -2,3 +2,6 @@
 	path = extern/pybind11
 	url = ../../pybind/pybind11
 	branch = stable
+[submodule "extern/carma"]
+	path = extern/carma
+	url = https://github.com/RUrlus/carma.git
