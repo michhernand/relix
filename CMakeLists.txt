@@ -25,9 +25,24 @@ FetchContent_MakeAvailable(Catch2)
 
 find_package(Armadillo REQUIRED)
 
+if(APPLE)
+	find_library(ACCELERATE_FRAMEWORK accelerate)
+	if (${ACCELERATE_FRAMEWORK})
+		SET(ADDITIONAL_LIBS ${ACCELERATE_FRAMEWORK})
+	endif()
+endif()
+
+add_subdirectory(extern/carma)
+
 option(
 	USE_R_LIBS 
 	"enable Rcpp and RcppArmadillo include paths for development" 
+	OFF
+)
+
+option(
+	USE_PY_LIBS
+	"enable Python bindings"
 	OFF
 )
 
@@ -50,14 +65,26 @@ else()
 	add_library(relix_lib INTERFACE)
 endif()
 
-
-
 target_include_directories(relix_lib INTERFACE
 	${CMAKE_SOURCE_DIR}/inst/include ${ARMADILLO_INCLUDE_DIRS}
 )
 
-target_link_libraries(relix_lib INTERFACE
-	${ARMADILLO_LIBRARIES}
-)
+if (USE_PY_LIBS)
+	# if (NOT TARGET armadillo::armadillo)
+	# 	add_library(armadillo::armadillo INTERFACE IMPORTED)
+	# 	set_target_properties(armadillo::armadillo PROPERTIES
+	# 		INTERFACE_INCLUDE_DIRECTORIES "${ARMADILLO_INCLUDE_DIRS}"
+	# 		INTERFACE_LINK_LIBRARIES "${ARMADILLO_LIBRARIES}"
+	# 	)
+	# endif()
+	add_subdirectory(py)
+else()
+	target_link_libraries(relix_lib INTERFACE
+		${ARMADILLO_LIBRARIES}
+		${ADDITIONAL_LIBS}
+	)
+endif()
 
-add_subdirectory(tests/cpp)
+
+
+# add_subdirectory(tests/cpp)
