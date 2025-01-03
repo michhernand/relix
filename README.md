@@ -54,7 +54,11 @@ Please refer to the [project wiki](https://github.com/michhernand/relix/wiki) fo
 # Roadmap
 - [X] "First" algorithm.
 - [X] "Last" algorithm.
-- [ ] (In Progress) v0.1 release.
+- [ ] (In Progress) v0.1 C++ release.
+- [ ] (In Progress) v0.1 R release.
+- [ ] (In Progress) v0.1 Python release.
+- [ ] R Library on R-Forge.
+- [ ] Python Library on Conda Forge.
+- [ ] "LMG" algorithm.
 - [ ] R Library on CRAN.
 - [ ] Python Library on PyPI.
-- [ ] "LMG" algorithm.
