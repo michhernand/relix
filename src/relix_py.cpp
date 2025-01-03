@@ -47,7 +47,7 @@ py::array relix(
 }
 
 PYBIND11_MODULE(relix_py, m) {
-    m.doc() = "Relix Pybind11 module";  // Optional docstring for the module
-    m.def("relix", &relix, "Function to perform relix calculations",
+    m.doc() = "Relix Pybind11 Binding"; 
+    m.def("relix_cpp", &relix, "Function to perform relix calculations",
           py::arg("x"), py::arg("y"), py::arg("type"));
 }

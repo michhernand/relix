@@ -66,3 +66,7 @@ tests/cpp/*.cmake
 test/cpp/Makefile
 .DS_Store
 cmake_cmd.sh
+venv/
+py/venv
+.venv/
+py/.venv

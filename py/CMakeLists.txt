@@ -15,3 +15,8 @@ target_link_libraries(relix_py PRIVATE
 target_include_directories(relix_py PRIVATE
     ${CMAKE_SOURCE_DIR}/inst/include
 )
+
+add_custom_command(TARGET relix_py
+	POST_BUILD
+	COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:relix_py> ${CMAKE_SOURCE_DIR}/py/relix
+)

@@ -6,11 +6,15 @@ OPTION(FOLDERS_ONLY "clean folders only" OFF)
 SET(BUILD_DIR "build" CACHE STRING "build directory")
 SET(CACHE_DIR ".cache" CACHE STRING "cache directory")
 SET(DEPS_DIR "_deps" CACHE STRING "_deps directory")
+SET(DIST_DIR "py/dist" CACHE STRING "dist directory")
 SET(RCMD_CHECK_DIR "relix.Rcheck" CACHE STRING "R CMD check directory")
+SET(VCPKG_INSTALLED_DIR "vcpkg_installed" CACHE STRING "vcpkg_installed")
+SET(PYCACHE "__pycache__" CACHE STRING "__pycache__")
+SET(TESTING_DIR "Testing" CACHE STRING "Testing")
 
 SET(
 	CACHE_FILES
-	"CMakeCache.txt;cmake_install.cmake;compile_commands.json;CMakeFiles;*.o;*.so;*.a;*.log;relix_*.tar.gz;tests/relix_test"
+	"CMakeCache.txt;cmake_install.cmake;compile_commands.json;CMakeFiles;*.o;*.so;*.a;*.log;relix_*.tar.gz;tests/relix_test;py/relix/*.so;py/relix/*.pyd;py/relix/*.dll"
 	CACHE INTERNAL
 	"build cache files"
 )
@@ -52,7 +56,11 @@ IF(${CLEAN})
 	delete_dir(${CACHE_DIR})
 	delete_dir(${BUILD_DIR})
 	delete_dir(${DEPS_DIR})
+	delete_dir(${DIST_DIR})
 	delete_dir(${RCMD_CHECK_DIR})
+	delete_dir(${VCPKG_INSTALLED_DIR})
+	delete_dir(${PYCACHE})
+	delete_dir(${TESTING_DIR})
 
 	delete_files(${CACHE_FILES})
 	delete_files(${TEMP_FILES})
