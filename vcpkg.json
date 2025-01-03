@@ -2,6 +2,7 @@
   "dependencies": [
     "armadillo",
     "blas",
-    "lapack"
+    "lapack",
+    "pybind11"
   ]
 }
